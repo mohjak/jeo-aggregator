@@ -50,16 +50,12 @@ class Newsroom_Highlight_Carousel_Widget extends SiteOrigin_Widget {
   }
   function initialize() {
 
-    static $enqueued = false;
 
-    if(!$enqueued) {
       $this->register_frontend_scripts(
         array(
-          array( 'newsroom-highlight-carousel', get_stylesheet_directory_uri() . '/inc/siteorigin-widgets/highlight-carousel/highlight-carousel.js', array( 'jquery', 'hammer.js' ), '0.0.1' )
+          array( 'newsroom-highlight-carousel', get_stylesheet_directory_uri() . '/inc/siteorigin-widgets/highlight-carousel/highlight-carousel.js', array(), '0.0.1' )
         )
       );
-      $enqueued = true;
-    }
 
 
     $this->register_frontend_styles(

@@ -33,10 +33,7 @@ $map_id = get_post_meta( $post->ID, 'map_id', true);
 <div class="main">
     <a name="content"></a>
     <div class="map map-vertical">
-        <div class="map-container clearfix map-fill map-tall">
-            <div id="map_<?php echo $map_id; ?>_0"></div>
-        </div>
-        <script type="text/javascript">jeo({"postID":<?php echo $map_id; ?>,"count":0});</script>
+        <?php get_template_part('stage', 'map'); ?>
         <div id="stories-right">
             <section class="sc-container" id="recent">
                 <h2 class="alt">News Stream</h2>

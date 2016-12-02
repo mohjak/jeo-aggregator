@@ -6,6 +6,7 @@ get_header(); ?>
 
 <?php if(have_posts()) : the_post(); ?>
 <?php
+wp_reset_query();
 $topic = wp_get_post_terms($id, 'topic', array('fields' => 'all'));
 $topic_name = $topic[0]->name;
 $topic_desc = $topic[0]->description;
@@ -28,7 +29,8 @@ $args = array(
     'topic'            => $topic_name,
     'pub_type'         => $pub_type_name
 );
-$query = new WP_Query( $args );
+global $wp_query;
+$wp_query = new WP_Query( $args );
 $map_id = get_post_meta( $post->ID, 'map_id', true);
 $pub_name   = get_post_meta( $id, 'pub_name' , true );
 $source_link   = get_post_meta( $id, 'source_link', true );
@@ -51,26 +53,22 @@ if ($pub_name != '' and $source_link != '') {
                     <a class="button share-button" href="<?php echo jeo_get_share_url(array('map_id' => $post->ID)); ?>"><?php _e('Embed this map', 'ekuatorial'); ?></a>
                 </li>
             </ul>
-            <h1 class="title"><?php the_title(); ?></h1>
-            <?php while(have_posts()) : the_post(); ?>
-            <div id="main-map" <?php post_class('stage-map'); ?>>
-                <?php jeo_map(); ?>
-            </div>
-            <?php endwhile; ?>
         </div>
     </div>
 </section>
 <div class="main">
     <a name="content"></a>
     <div class="section-list">
-
+	<div id="main-map" <?php post_class('stage-map'); ?>>
+		<?php jeo_map($map_id); ?>
+	</div>
         <header class="section-header">
             <h1><?php echo $topic_name, $region_name, $pub_type_name; ?></h1>
             <h2 class="subhead"><?php echo $topic_desc, $region_desc, $pub_type_desc; ?></h2>
         </header>
 
         <div class="sv-slice">
-            <?php foreach ( $query->posts as $post ) { ?>
+            <?php foreach ( $wp_query->posts as $post ) { ?>
             <article class="sv-story">
                 <?php 
                 if (has_post_thumbnail($post->ID)) {

@@ -27,8 +27,18 @@ if($list_posts_query->have_posts()) :
             </div>
           <?php endif; ?>
           <div class="list-posts-post-content">
+            <?php
+            $kicker = wp_get_post_terms(get_the_ID(), 'pub_type', array('fields' => 'names'));
+            if ($kicker[0] != '') {
+                echo '<p class="kicker">'. $kicker[0] .'</p>';
+            }
+            ?>
             <h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
             <p class="date"><?php echo get_the_date(); ?></p>
+            <?php
+            $pub_name = get_post_meta( get_the_ID(), 'pub_name', true);
+            echo '<p class="dateline">' . $pub_name . '</p>';
+            ?>
           </div>
         </article>
       </li>

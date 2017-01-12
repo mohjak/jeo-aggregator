@@ -39,33 +39,31 @@ if ($pub_name != '' and $source_link != '') {
 } else {
     $pub_name = '';
 }?>
-<section id="stage">
-    <div class="container">
-        <div class="twelve columns">
-            <ul class="share">
-                <li class="facebook">
-                    <div class="fb-like" data-href="<?php the_permalink(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div>
-                </li>
-                <li class="twitter">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="ekuatorial" data-lang="<?php if(function_exists('qtranxf_getLanguage')) echo qtranxf_getLanguage(); ?>">Tweet</a>
-                </li>
-                <li class="share">
-                    <a class="button share-button" href="<?php echo jeo_get_share_url(array('map_id' => $post->ID)); ?>"><?php _e('Embed this map', 'ekuatorial'); ?></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
 <div class="main">
     <a name="content"></a>
     <div class="section-list">
+    <header class="section-header">
+        <section id="stage">
+            <div class="container">
+                    <ul class="share">
+                        <li class="facebook">
+                            <div class="fb-like" data-href="<?php the_permalink(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div>
+                        </li>
+                        <li class="twitter">
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="ekuatorial" data-lang="<?php if(function_exists('qtranxf_getLanguage')) echo qtranxf_getLanguage(); ?>">Tweet</a>
+                        </li>
+                        <li class="share">
+                            <a class="button share-button" href="<?php echo jeo_get_share_url(array('map_id' => $post->ID)); ?>"><?php _e('Embed this map', 'ekuatorial'); ?></a>
+                        </li>
+                    </ul>
+            </div>
+        </section>
+        <h1><?php echo $topic_name, $region_name, $pub_type_name; ?></h1>
+        <h2 class="subhead"><?php echo $topic_desc, $region_desc, $pub_type_desc; ?></h2>
+    </header>
     <div id="main-map" <?php post_class('stage-map'); ?>>
         <?php jeo_map($map_id); ?>
     </div>
-        <header class="section-header">
-            <h1><?php echo $topic_name, $region_name, $pub_type_name; ?></h1>
-            <h2 class="subhead"><?php echo $topic_desc, $region_desc, $pub_type_desc; ?></h2>
-        </header>
 
         <div class="sv-slice">
             <?php foreach ( $wp_query->posts as $post ) { ?>

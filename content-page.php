@@ -4,25 +4,14 @@ Template Name: Content Page
 */
 get_header(); ?>
 
-<section id="stage">
-    <div class="container">
-        <div class="twelve columns">
-            <ul class="share">
-                <li class="facebook">
-                    <div class="fb-like" data-href="<?php the_permalink(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div>
-                </li>
-                <li class="twitter">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="ekuatorial" data-lang="<?php if(function_exists('qtranxf_getLanguage')) echo qtranxf_getLanguage(); ?>">Tweet</a>
-                </li>
-                <li class="share">
-                    <a class="button share-button" href="<?php echo jeo_get_share_url(array('map_id' => $post->ID)); ?>"><?php _e('Embed this map', 'ekuatorial'); ?></a>
-                </li>
-            </ul>
-            <h1 class="title"><?php the_title(); ?></h1>
-            <?php get_template_part('stage', 'map'); ?>
-        </div>
+<div class="container">
+    <div class="twelve columns">
+        <h1 class="title"><?php the_title(); ?></h1>
+            <div id="main-map" <?php post_class('stage-map'); ?>>
+                <?php jeo_map($map_id=1647,$main_map=false,$force=true); ?>
+            </div>
     </div>
-</section>
+</div>
 
 <section id="content">
     <?php
@@ -31,7 +20,7 @@ get_header(); ?>
         'paged' => $paged,
         's' => isset($_GET['s']) ? $_GET['s'] : null
     );
-    query_posts($query);
+    $query = query_posts($query);
     if(have_posts()) : ?>
 
         <section id="last-stories" class="loop-section">
@@ -52,6 +41,19 @@ get_header(); ?>
                             <a class="geojson" href="<?php echo $geojson; ?>"><?php _e('Get GeoJSON', 'ekuatorial'); ?></a>
                             <a class="download" href="<?php echo $download; ?>"><?php _e('Download', 'ekuatorial'); ?></a>
                         </div>
+                        <div id="stage">
+                            <ul class="share">
+                                <li class="facebook">
+                                    <div class="fb-like" data-href="<?php the_permalink(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div>
+                                </li>
+                                <li class="twitter">
+                                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="ekuatorial" data-lang="<?php if(function_exists('qtranxf_getLanguage')) echo qtranxf_getLanguage(); ?>">Tweet</a>
+                                </li>
+                                <li class="share">
+                                    <a class="button share-button" href="<?php echo jeo_get_share_url(array('map_id' => $post->ID)); ?>"><?php _e('Embed this map', 'ekuatorial'); ?></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,9 +61,14 @@ get_header(); ?>
                 <?php get_template_part('loop'); ?>
             </div>
         </section>
-
     <?php
     endif;
+        echo paginate_links( array(
+            'base' => '%_%',
+            'format' => '?paged=%#%',
+            'current' => max( 1, get_query_var('paged') ),
+            'total' => $query->max_num_pages
+    ) );
     wp_reset_query(); ?>
 
     <?php get_template_part('section', 'submit-call'); ?>

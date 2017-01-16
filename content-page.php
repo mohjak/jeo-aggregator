@@ -7,6 +7,17 @@ get_header(); ?>
 <div class="container">
     <div class="twelve columns">
         <h1 class="title"><?php the_title(); ?></h1>
+<?php
+global $wp_query;
+$args = array(
+    'page'      => '',
+    'map'       => 'cambodia',
+    'post_type' => 'map',
+    'name'      => 'cambodia'
+);
+$wq_query = new WP_Query($args);
+?>
+
         <?php get_template_part('stage', 'map'); ?>
     </div>
 </div>

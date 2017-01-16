@@ -7,9 +7,7 @@ get_header(); ?>
 <div class="container">
     <div class="twelve columns">
         <h1 class="title"><?php the_title(); ?></h1>
-            <div id="main-map" <?php post_class('stage-map'); ?>>
-                <?php jeo_map($map_id=1647,$main_map=false,$force=true); ?>
-            </div>
+        <?php get_template_part('stage', 'map'); ?>
     </div>
 </div>
 

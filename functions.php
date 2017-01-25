@@ -610,7 +610,8 @@ function page_map_setting_box() {
     $map_id = get_post_meta( $post->ID, 'map_id', true);
     $args = array(
 	    'post_type'=> 'map',
-	    'order'    => 'ASC'
+	    'order'    => 'ASC',
+            'posts_per_page' => -1
     );
     $maps = new WP_Query( $args );
 ?>

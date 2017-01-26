@@ -673,3 +673,11 @@ function save_page_map_settings ( $post_id ) {
 }
 add_action( 'admin_init', 'page_map_setting' );
 add_action( 'save_post', 'save_page_map_settings' );
+
+function map_marker_filter($query) {
+    $map_id = get_post_meta( $query->posts[0]->ID, 'map_id', true);
+    $query = new WP_Query();
+    $query->query_vars['map_id'] = $map_id;
+    return $query;
+}
+add_filter( 'jeo_marker_base_query', 'map_marker_filter', 10, 1 );

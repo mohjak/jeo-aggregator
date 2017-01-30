@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Template Name: Content Page
 */
@@ -7,29 +7,37 @@ get_header(); ?>
 <div class="container">
     <div class="twelve columns">
         <h1 class="title"><?php the_title(); ?></h1>
-<?php
-global $wp_query;
-$args = array(
-    'page'      => '',
-    'map'       => 'cambodia',
-    'post_type' => 'map',
-    'name'      => 'cambodia'
-);
-$wq_query = new WP_Query($args);
-?>
-
         <?php get_template_part('stage', 'map'); ?>
     </div>
 </div>
 
 <section id="content">
     <?php
-    $paged = get_query_var('paged') ? get_query_var('paged') : 1;
-    $query = array(
-        'paged' => $paged,
-        's' => isset($_GET['s']) ? $_GET['s'] : null
-    );
-    $query = query_posts($query);
+wp_reset_query();
+$topic = wp_get_post_terms($id, 'topic', array('fields' => 'all'));
+$topic_name = $topic[0]->name;
+$topic_desc = $topic[0]->description;
+$region = wp_get_post_terms($id, 'region', array('fields' => 'all'));
+$region_name = $region[0]->name;
+$region_desc = $region[0]->description;
+$pub_type = wp_get_post_terms($id, 'pub_type', array('fields' => 'all'));
+$pub_type_name = $pub_type[0]->name;
+$pub_type_desc = $pub_type[0]->description;
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$args = array(
+    'posts_per_page'   => 10,
+    'paged'            => $paged,
+    'orderby'          => 'post_date',
+    'order'            => 'DESC',
+    'post_type'        => array('post', 'link', 'sequence'),
+    'post_status'      => 'publish',
+    'suppress_filters' => true,
+    'region'           => $region_name,
+    'topic'            => $topic_name,
+    'pub_type'         => $pub_type_name
+);
+
+    $query = query_posts($args);
     if(have_posts()) : ?>
 
         <section id="last-stories" class="loop-section">

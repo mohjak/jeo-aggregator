@@ -25,7 +25,7 @@ $pub_type_name = $pub_type[0]->name;
 $pub_type_desc = $pub_type[0]->description;
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $args = array(
-    'posts_per_page'   => 10,
+    'posts_per_page'   => 12,
     'paged'            => $paged,
     'orderby'          => 'post_date',
     'order'            => 'DESC',
@@ -38,6 +38,7 @@ $args = array(
 );
 
     $query = query_posts($args);
+    get_template_part('section', 'submit-call');
     if(have_posts()) : ?>
 
         <section id="last-stories" class="loop-section">
@@ -88,7 +89,6 @@ $args = array(
     ) );
     wp_reset_query(); ?>
 
-    <?php get_template_part('section', 'submit-call'); ?>
 </section>
 
 <?php get_template_part('section', 'main-widget'); ?>

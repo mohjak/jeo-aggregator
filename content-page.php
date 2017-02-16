@@ -71,6 +71,7 @@ $args = array(
         </section>
     <?php
     endif;
+    $query = new WP_Query($args);
         echo paginate_links( array(
             'base' => '%_%',
             'format' => '?paged=%#%',

@@ -156,6 +156,7 @@ if ($pub_name != '' and $source_link != '') {
             <?php } ?>
         </div>
         <?php
+            $query = new WP_Query($args);
             echo paginate_links( array(
                 'base' => '%_%',
                 'format' => '?paged=%#%',

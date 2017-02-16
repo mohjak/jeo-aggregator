@@ -12,7 +12,7 @@ function ekuatorial_submit() {
 			<div class="submit-area">
 				<a href="#" class="close-submit-story" title="<?php _e('Close', 'ekuatorial'); ?>">×</a>
 				<h2><?php _e('Submit a story', 'ekuatorial'); ?></h2>
-				<p class="description"><?php _e('Do you have news to share from the Amazon? Contribute to this map by submitting your story. Help broaden the understanding of the global impact of this important region in the world.', 'ekuatorial'); ?></p>
+				<p class="description"><?php _e("Do you have news to share on these topics? Contribute to this map by submitting a story.<br> Help us spread vital information about the world's most crticial eco-regions.", 'ekuatorial'); ?></p>
 				<div class="submit-content">
 					<div class="error"></div>
 					<div class="choice">

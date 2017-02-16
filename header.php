@@ -41,7 +41,7 @@
 				if(function_exists('qtranxf_getLanguage'))
 					$lang = qtranxf_getLanguage();
 				?>
-				<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo-mekong.png" class="logo" />
+				<a href="<?php echo home_url('/' . $lang); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo-mekong.png" class="logo" /></a>
 				<h1><a href="<?php echo home_url('/' . $lang); ?>" title="<?php echo bloginfo('name'); ?>"><?php bloginfo('name'); ?></a></h1>
 				<p class="slogan"><?php bloginfo('description'); ?></p>
 				<?php get_search_form(); ?>

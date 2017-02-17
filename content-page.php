@@ -2,12 +2,16 @@
 /*
 Template Name: Content Page
 */
-get_header(); ?>
+get_header(); 
+$map_id = get_post_meta( $post->ID, 'map_id', true);
+?>
 
 <div class="container">
     <div class="twelve columns">
         <h1 class="title"><?php the_title(); ?></h1>
-        <?php get_template_part('stage', 'map'); ?>
+        <div id="main-map" <?php post_class('stage-map'); ?>>
+            <?php jeo_map($map_id); ?>
+        </div>
     </div>
 </div>
 

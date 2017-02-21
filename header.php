@@ -58,6 +58,11 @@
 						</ul>
 					</nav>
 				</div>
+<form role="search" method="get" id="search" action="<?php bloginfo('home'); ?>/"> 
+    <div> 
+        <input type="text" name="s" id="s" placeholder="<?php _e('Search here...', 'jeo'); ?>" value="<?php if(isset($_GET['s'])) echo $_GET['s']; ?>" /> 
+    </div> 
+</form>
 				<div class="four columns">
 					<?php if(function_exists('qtranxf_getLanguage')) : ?>
 						<nav id="langnav">

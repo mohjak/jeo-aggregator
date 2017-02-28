@@ -74,7 +74,7 @@ function ekuatorial_submit() {
 							<input type="text" name="story[meta][publish_date]" id="story_date" size="20" />
 						</p>
 						<p>
-							<label for="story_notes"><?php _e('Notes to the ekuatorial editor', 'ekuatorial'); ?></label>
+							<label for="story_notes"><?php _e('Notes to the editor', 'ekuatorial'); ?></label>
 							<textarea name="story[meta][notes]" id="story_notes" rows="7" cols="50"></textarea>
 						</p>
 						<input class="button" type="submit" value="<?php _e('Send story', 'ekuatorial'); ?>" />

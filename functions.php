@@ -681,3 +681,15 @@ function map_marker_filter($query) {
     return $query;
 }
 add_filter( 'jeo_marker_base_query', 'map_marker_filter', 10, 1 );
+
+function subscriber_widgets() {
+
+	register_sidebar( array(
+		'name'          => 'Subscriber Widgets',
+		'id'            => 'subscriber_widgets',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+	) );
+
+}
+add_action( 'widgets_init', 'subscriber_widgets' );

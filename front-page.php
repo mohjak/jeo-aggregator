@@ -186,10 +186,6 @@ $arg_medium = array(
             </div>
         </section>
 
-        <div id="subscribe-right">
-            <h3>Subscribe for email updates</h3>
-            <?php dynamic_sidebar( 'subscriber_widgets' ); ?>
-        </div>
         <div class="front-social social-subscribe">
             <h3>Follow us on social media</h3>
             <a href="https://twitter.com/MekongEye"><img class="social" src="<?php bloginfo('stylesheet_directory');?>/images/twitter-icon.png" alt="twitter"></a>

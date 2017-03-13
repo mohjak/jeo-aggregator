@@ -84,10 +84,10 @@
 					<nav id="social">
 						<ul>
 							<li class="twitter">
-								<a href="https://twitter.com/EkuatorialMap" rel="external" target="_blank" title="Twitter"></a>
+								<a href="https://twitter.com/MekongEye" rel="external" target="_blank" title="Twitter"></a>
 							</li>
 							<li class="fb">
-								<a href="https://facebook.com/ekuatorial" rel="external" target="_blank" title="Facebook"></a>
+								<a href="https://facebook.com/MekongEye" rel="external" target="_blank" title="Facebook"></a>
 							</li>
 						</ul>
 					</nav>

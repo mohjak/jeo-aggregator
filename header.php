@@ -50,7 +50,9 @@
 		<section id="mastnav" class="clearfix">
 			<div class="container">
 				<div class="eight columns">
-					<nav>
+					<nav id="nav" role="navigation">
+<a href="#nav" title="Show navigation"></a>
+<a href="#" title="Hide navigation"></a>
 						<ul>
 							<?php wp_nav_menu(array(
 								'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s<li><a href="#submit" class="submit-story">' . __('Submit a story', 'ekuatorial') . '</a></li></ul>'

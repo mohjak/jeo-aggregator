@@ -68,6 +68,15 @@
 					get_template_part('loop');
 				?>
 			</div>
+<?php
+            $query = new WP_Query($args);
+            echo paginate_links( array(
+                'base' => '%_%',
+                'format' => '?paged=%#%',
+                'current' => max( 1, get_query_var('paged') ),
+                'total' => $query->max_num_pages
+        ) );
+        ?>
 		</section>
 
 	<?php else : ?>

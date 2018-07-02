@@ -49,189 +49,24 @@ $arg_medium = array(
     <?php while ( have_posts() ) : the_post(); ?>
         <?php the_content(); ?>
     <?php endwhile; ?>
-    	<script>
-    	$('#map-group li a').click(function() {
-			var tab_id = $(this).attr('aria-controls');
-			var element = 'div#' + tab_id + ' article div.sc-story__hd div';
-			var script = ''
-			var html = '<div class="map-container clearfix map-fill map-tall"><div id="map_' + tab_id + '_0"></div></div><script type="text/javascript">jeo({"postID":' + tab_id + ',"count":0});';
-			$(element).html(html);
-		});
-    	</script>
     </div>
     <div id="stories-right">
-        <section class="sc-container" id="recent">
-            <h2 class="alt">News Stream</h2>
-            <div class="sc-slice size-xs">
-            <?php 
-            $args = array(
-                'posts_per_page'   => 10,
-                'orderby'          => 'post_date',
-                'order'            => 'DESC',
-                'post_type'        => array('post', 'link', 'sequence'),
-                'post_status'      => 'publish',
-                'suppress_filters' => true
-            );
-            $posts = get_posts( $args );
-            foreach ( $posts as $post ) {
-            	$author_name = get_post_meta( $post->ID, 'author_name', true );
-            ?>
-                <article class="sc-story">
-                    <?php 
-                    $link = get_post_meta($post->ID, 'link_target', true);
-                    if ($link != '') {
-                        echo '<a href="' . $link .'" target="_blank">';
-                    }
-                    else {
-                        echo '<a href="' . post_permalink($post->ID) .'">';
-                    }
-                    ?>
-                        <div class="sc-story__bd">
-                            <?php
-                            $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
-                            $pub_name = get_post_meta( $post->ID, 'pub_name', true);
-                            ?>
-                            <h4><?php echo ($kicker[0] == '' ? '' : '<b class="kicker">' . $kicker[0] . '</b> ');?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
-                        </div>
-                    </a>
-                </article>
-            <?php 
-            }
-            ?>
+        <section class="sc-container" id="new-digest">
+            <img width="200" src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo-mekong-banner.png" class="logo" style="width: 100%" />
+            <div class="new-digest-widget">
+                <h5 class="title">title</h5>
+                <h5 class="date">data</h5>
+                <hr>
+                <img width="200" src="<?php echo get_stylesheet_directory_uri(); ?>/img/new-digest.png" class="logo" style="width: 100%" />
+                <div class="new-digest-links">
+                    <a href="#" class="view">View Last Edition</a>
+                    <a href="#" class="subscribe">Subscribe</a>
+                </div>
             </div>
         </section>
 
-        <section class="sc-container" id="resource">
-            <h2 class="alt">Resources & Press Releases</h2>
-            <div class="sc-slice size-xs">
-            <?php
-            $args = array(
-                'posts_per_page'   => 10,
-                'orderby'          => 'post_date',
-                'order'            => 'DESC',
-                'post_type'        => array('post', 'link', 'sequence'),
-                'post_status'      => 'publish',
-                'pub_type'         => 'Resource / PR',
-                'suppress_filters' => true
-            );
-            $posts = get_posts( $args );
-            foreach ( $posts as $post ) {
-                $author_name = get_post_meta( $post->ID, 'author_name', true );
-            ?>
-                <article class="sc-story">
-                    <?php 
-                    $link = get_post_meta($post->ID, 'link_target', true);
-                    if ($link != '') {
-                        echo '<a href="' . $link .'" target="_blank">';
-                    }
-                    else {
-                        echo '<a href="' . post_permalink($post->ID) .'">';
-                    }
-                    ?>
-                        <div class="sc-story__bd">
-                            <?php
-                            $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
-                            $pub_name = get_post_meta( $post->ID, 'pub_name', true);
-                            ?>
-                            <h4><?php echo ($kicker[0] == '' ? '' : '<b class="kicker">' . $kicker[0] . '</b> ');?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
-                        </div>
-                    </a>
-                </article>
-            <?php 
-            }
-            ?>
-            </div>
-        </section>
-
-        <section class="sc-container" id="editor">
-            <h2 class="alt">Editor’s Picks</h2>
-            <div class="sc-slice size-xs">
-            <?php
-            $args = array(
-                'posts_per_page'   => 10,
-                'orderby'          => 'post_date',
-                'order'            => 'DESC',
-                'post_type'        => array('post', 'link', 'sequence'),
-                'post_status'      => 'publish',
-                'meta_key'         => 'editor_pick',
-                'meta_value'       => "true",
-                'suppress_filters' => true
-            );
-            $posts = get_posts( $args );
-            foreach ( $posts as $post ) {
-                $author_name = get_post_meta( $post->ID, 'author_name', true );
-            ?>
-                <article class="sc-story">
-                    <?php 
-                    $link = get_post_meta($post->ID, 'link_target', true);
-                    if ($link != '') {
-                        echo '<a href="' . $link .'" target="_blank">';
-                    }
-                    else {
-                        echo '<a href="' . post_permalink($post->ID) .'">';
-                    }
-                    ?>
-                        <div class="sc-story__bd">
-                            <?php
-                            $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
-                            $pub_name = get_post_meta( $post->ID, 'pub_name', true);
-                            ?>
-                            <h4><?php echo ($kicker[0] == '' ? '' : '<b class="kicker">' . $kicker[0] . '</b> ');?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
-                        </div>
-                    </a>
-                </article>
-            <?php 
-            }
-            ?>
-            </div>
-        </section>
-
-        <div class="front-social social-subscribe">
-            <h3>Follow us on social media</h3>
-            <a href="https://twitter.com/MekongEye"><img class="social" src="<?php bloginfo('stylesheet_directory');?>/images/twitter-icon.png" alt="twitter"></a>
-            <a href="https://www.facebook.com/MekongEye"><img class="social" src="<?php bloginfo('stylesheet_directory');?>/images/facebook-icon.png" alt="facebook"></a>
-        </div>
-
-        <section class="sc-container" id="views">
-            <h2 class="alt">Most Read</h2>
-            <div class="sc-slice size-xs">
-            <?php
-            $args = array(
-                'posts_per_page'   => 10,
-                'orderby'          => 'meta_value',
-                'order'            => 'DESC',
-                'post_type'        => array('post', 'link', 'sequence'),
-                'post_status'      => 'publish',
-                'meta_key'         => 'post_views_count',
-                'suppress_filters' => true
-            );
-            $posts = get_posts( $args );
-            foreach ( $posts as $post ) {
-                $author_name = get_post_meta( $post->ID, 'author_name', true );
-            ?>
-                <article class="sc-story">
-                    <?php 
-                    $link = get_post_meta($post->ID, 'link_target', true);
-                    if ($link != '') {
-                        echo '<a href="' . $link .'" target="_blank">';
-                    }
-                    else {
-                        echo '<a href="' . post_permalink($post->ID) .'">';
-                    }
-                    ?>
-                        <div class="sc-story__bd">
-                            <?php
-                            $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
-                            $pub_name = get_post_meta( $post->ID, 'pub_name', true);
-                            ?>
-                            <h4><?php echo ($kicker[0] == '' ? '' : '<b class="kicker">' . $kicker[0] . '</b> ');?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
-                        </div>
-                    </a>
-                </article>
-            <?php 
-            }
-            ?>
-            </div>
+        <section class="sc-container" id="twitter">
+            <?php dynamic_sidebar( 'subscriber_widgets' ); ?>
         </section>
 
     </div>

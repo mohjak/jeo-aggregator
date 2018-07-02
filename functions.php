@@ -46,6 +46,7 @@ if(class_exists('SiteOrigin_Widget')) {
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/square-posts/square-posts.php');
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/list-posts/list-posts.php');
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/list-images/list-images.php');
+	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/highlight-posts/highlight-posts.php');	
 }
 
 function newsroom_pb_parse_query($pb_query) {

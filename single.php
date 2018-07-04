@@ -36,7 +36,7 @@ if ($pub_name != '' and $url != '') {
 					<div class="seven columns">
 						<div class="post-description">
 							<p class="by">By <strong><?php echo $author ?></strong></p>
-							<p class="date"><i><?php echo $location?>,</i> <?php echo get_the_date(); ?> </p>
+							<p class="date"><i><?php echo ($location != '' ? $location .',' : '');?></i> <?php echo get_the_date(); ?> </p>
 							<p class="source"><?php echo $pub_name ?></p>
 							<?php the_content(); ?>
 						</div>

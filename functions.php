@@ -207,9 +207,6 @@ function ekuatorial_enqueue_marker_script() {
 }
 add_action('wp_footer', 'ekuatorial_enqueue_marker_script');
 
-// slideshow
-include(STYLESHEETPATH . '/inc/slideshow.php');
-
 // ajax calendar
 include(STYLESHEETPATH . '/inc/ajax-calendar.php');
 

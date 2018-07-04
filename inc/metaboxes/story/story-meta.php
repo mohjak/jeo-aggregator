@@ -41,7 +41,7 @@ function story_meta_inner_custom_box($post) {
 		</p>
 		<p>
 			<label for="story_date"><?php _e('Publishing date', 'ekuatorial'); ?></label><br/>
-			<input type="text" name="publish_date" value="<?php echo $publish_date; ?>" id="story_date" size="20" />
+			<input type="date" name="publish_date" value="<?php echo $publish_date; ?>" id="story_date" size="20" />
 		</p>
 		<p>
 			<label for="story_notes"><?php _e('Notes to the ekuatorial editor', 'ekuatorial'); ?></label><br/>

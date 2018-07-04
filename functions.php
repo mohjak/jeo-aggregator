@@ -691,3 +691,23 @@ function subscriber_widgets() {
 
 }
 add_action( 'widgets_init', 'subscriber_widgets' );
+
+function me_publishing_date( $the_date, $d, $post ) {
+	$value = get_post_meta( $post->ID, 'publish_date', true);
+	if ( $value == '' ) {
+		return $the_date;
+	} else {
+		$date = DateTime::createFromFormat( 'Y-m-d', $value );
+		if ($date == false) {
+			return $the_date;
+		}
+		$ts = $date->format('U'); 
+	}
+	if ($d != '') {
+		$value = $date->format($d);
+	} else {
+		$value = strftime("%B %d, %Y", $ts);
+	}
+	return $value;
+}
+add_action( 'get_the_date', 'me_publishing_date', 99, 3 );

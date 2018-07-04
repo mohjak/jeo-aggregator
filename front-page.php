@@ -64,7 +64,6 @@ $arg_medium = array(
                 );
                 $query = new WP_Query( $args );
                 $post = $query->posts[0];
-                var_dump($post);
                 ?>
                 <h5 class="title"><?php echo $post->post_title ?></h5>
                 <h5 class="date"><?php echo get_the_date('', $post->ID); ?></h5>

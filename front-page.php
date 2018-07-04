@@ -54,12 +54,24 @@ $arg_medium = array(
         <section class="sc-container" id="new-digest">
             <img width="200" src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo-mekong-banner.png" class="logo" style="width: 100%" />
             <div class="new-digest-widget">
-                <h5 class="title">title</h5>
-                <h5 class="date">data</h5>
+                <?php 
+                $args = array(
+                    'post_type' => 'post',
+                    'tag' => 'new-digest',
+                    'orderby' => 'date',
+                    'order'   => 'DESC',
+                    'posts_per_page' => 1
+                );
+                $query = new WP_Query( $args );
+                $post = $query->posts[0];
+                var_dump($post);
+                ?>
+                <h5 class="title"><?php echo $post->post_title ?></h5>
+                <h5 class="date"><?php echo get_the_date('', $post->ID); ?></h5>
                 <hr>
-                <img width="200" src="<?php echo get_stylesheet_directory_uri(); ?>/img/new-digest.png" class="logo" style="width: 100%" />
+                <img width="200" src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>" class="logo" style="width: 100%" />
                 <div class="new-digest-links">
-                    <a href="#" class="view">View Last Edition</a>
+                    <a href="<?php echo get_post_meta($post->ID, 'story_url', true); ?>" class="view">View Last Edition</a>
                     <a href="#" class="subscribe">Subscribe</a>
                 </div>
             </div>

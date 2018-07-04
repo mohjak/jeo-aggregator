@@ -115,23 +115,39 @@ html {
   width: 40%;
   float: left;
   background-color: #EEF4D9;
-  margin-right: 5%;
+  margin-right: 1%;
 }
 .newsroom-highlight-posts-right {
   width: 40%;
   float: right;
   background-color: #EEF4D9;
-  margin-left: 5%;
+  margin-left: 1%;
 }
 .newsroom-highlight-headline-posts {
-  width: 50%;
+  width: 58%;
   float: left;
-}
-.newsroom-highlight-headline-posts .highlight-posts-post-content {
-  display: flex;
-  align-items: baseline;
 }
 .highlight-posts-post-content * {
   padding-right: 10px;
+  float: left;
+}
+
+.highlight-posts-post-content {
+  padding: 0px 5px;
+}
+.highlight-posts-post-content p {
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+.highlight-posts-post-content p:nth-child(2) {
+  clear: both;
+}
+.highlight-posts-post-content h2 {
+  font-size: 18px;
+  line-height: 1;
+  margin-bottom: 0px;
+}
+li.highlight-posts-item {
+  margin: 0px;
 }
 /*# sourceMappingURL=square-posts.css.map */

@@ -6,9 +6,9 @@
 					<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 						<?php
 						if(has_post_thumbnail())
-							the_post_thumbnail('post-thumb');
+							the_post_thumbnail(array(800, 650));
 						else
-							echo '<img src="' . get_post_meta($post->ID, 'picture', true) . '" />';
+							echo '<img width="800" hight="650" src="' . get_post_meta($post->ID, 'picture', true) . '" />';
 						?>
 					</a>
 					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>

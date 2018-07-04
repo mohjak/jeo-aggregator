@@ -77,7 +77,7 @@ $arg_medium = array(
         </section>
 
         <section class="sc-container" id="twitter">
-            <?php dynamic_sidebar( 'subscriber_widgets' ); ?>
+            <?php dynamic_sidebar( 'main-sidebar' ); ?>
         </section>
 
     </div>

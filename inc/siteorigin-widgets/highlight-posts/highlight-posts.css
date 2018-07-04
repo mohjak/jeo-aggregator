@@ -111,11 +111,17 @@ html {
     margin: 0 5px;
   }
 }
-.newsroom-highlight-posts {
+.newsroom-highlight-posts-left {
   width: 40%;
   float: left;
   background-color: #EEF4D9;
   margin-right: 5%;
+}
+.newsroom-highlight-posts-right {
+  width: 40%;
+  float: right;
+  background-color: #EEF4D9;
+  margin-left: 5%;
 }
 .newsroom-highlight-headline-posts {
   width: 50%;

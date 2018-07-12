@@ -71,7 +71,7 @@ $arg_medium = array(
                 <img width="200" src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>" class="logo" style="width: 100%" />
                 <div class="new-digest-links">
                     <a href="<?php echo get_post_meta($post->ID, 'url', true); ?>" class="view">View Last Edition</a>
-                    <a href="#" class="subscribe">Subscribe</a>
+                    <a href="http://earthjournalism.us9.list-manage2.com/subscribe?u=fd0ac74ee9e05f99d956c80e7&id=5d4083d243" class="subscribe">Subscribe</a>
                 </div>
             </div>
         </section>

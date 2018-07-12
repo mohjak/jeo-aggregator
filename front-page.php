@@ -70,7 +70,7 @@ $arg_medium = array(
                 <hr>
                 <img width="200" src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>" class="logo" style="width: 100%" />
                 <div class="new-digest-links">
-                    <a href="<?php echo get_post_meta($post->ID, 'story_url', true); ?>" class="view">View Last Edition</a>
+                    <a href="<?php echo get_post_meta($post->ID, 'url', true); ?>" class="view">View Last Edition</a>
                     <a href="#" class="subscribe">Subscribe</a>
                 </div>
             </div>

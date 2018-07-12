@@ -78,7 +78,7 @@ $arg_medium = array(
 
         <section class="sc-container" id="twitter">
             <img width="200" src="<?php echo get_stylesheet_directory_uri(); ?>/img/ME-Twitter-banner.png" class="tweets" style="width: 100%" />
-            <?php dynamic_sidebar( 'subscriber_widgets' ); ?>
+            <?php dynamic_sidebar( 'main-sidebar' ); ?>
         </section>
 
     </div>

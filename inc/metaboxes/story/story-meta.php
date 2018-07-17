@@ -15,6 +15,7 @@ function story_meta_add_meta_box() {
 }
 
 function story_meta_inner_custom_box($post) {
+	$is_external = get_post_meta($post->ID, 'is_external', true);
 	$author_name = get_post_meta($post->ID, 'author_name', true);
 	$author_email = get_post_meta($post->ID, 'author_email', true);
 	$url = get_post_meta($post->ID, 'url', true);
@@ -23,6 +24,10 @@ function story_meta_inner_custom_box($post) {
 	$notes = get_post_meta($post->ID, 'notes', true);
 	?>
 	<div id="story-metabox">
+		<p>
+			<label for="external_story"><?php _e('External Story', 'ekuatorial'); ?></label><br/>
+			<input type="text" name="is_external" value="1" <?php echo ($is_external == '1' ? 'checked' : '');?> id="external_story" size="30" />
+		</p>
 		<p>
 			<label for="story_author_full_name"><?php _e('Author name', 'ekuatorial'); ?></label><br/>
 			<input type="text" name="author_name" value="<?php echo $author_name; ?>" id="story_author_full_name" size="30" />
@@ -61,6 +66,8 @@ function story_meta_save_postdata($post_id) {
 	if (false !== wp_is_post_revision($post_id))
 		return;
 
+	if(isset($_POST['is_external']))
+		update_post_meta($post_id, 'is_external', $_POST['is_external']);
 	if(isset($_POST['author_name']))
 		update_post_meta($post_id, 'author_name', $_POST['author_name']);
 	if(isset($_POST['author_email']))

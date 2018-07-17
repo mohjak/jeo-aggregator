@@ -23,9 +23,11 @@ if ($pub_name != '' and $url != '') {
 						<h1 class="title"><?php the_title(); ?></h1>
 						<h2 class="subhead"><?php the_excerpt(); ?></h2>
 					</header>
+					<?php if(has_post_thumbnail()):?>
 						<div id="main-map" class="stage-map">
 							<?php newsroom_featured_media(); ?>
 						</div>
+					<?php endif ?>
 				</div>
 			</div>
 		</section>

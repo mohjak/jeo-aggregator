@@ -26,7 +26,7 @@ function story_meta_inner_custom_box($post) {
 	<div id="story-metabox">
 		<p>
 			<label for="external_story"><?php _e('External Story', 'ekuatorial'); ?></label><br/>
-			<input type="text" name="is_external" value="1" <?php echo ($is_external == '1' ? 'checked' : '');?> id="external_story" size="30" />
+			<input type="checkbox" name="is_external" value="1" <?php echo ($is_external == '1' ? 'checked' : '');?> id="external_story" size="30" />
 		</p>
 		<p>
 			<label for="story_author_full_name"><?php _e('Author name', 'ekuatorial'); ?></label><br/>

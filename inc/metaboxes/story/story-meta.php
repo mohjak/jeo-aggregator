@@ -66,8 +66,12 @@ function story_meta_save_postdata($post_id) {
 	if (false !== wp_is_post_revision($post_id))
 		return;
 
-	if(isset($_POST['is_external']))
+	if(isset($_POST['is_external'])) {
 		update_post_meta($post_id, 'is_external', $_POST['is_external']);
+	}
+	else {
+		update_post_meta($post_id, 'is_external', '');
+	}
 	if(isset($_POST['author_name']))
 		update_post_meta($post_id, 'author_name', $_POST['author_name']);
 	if(isset($_POST['author_email']))

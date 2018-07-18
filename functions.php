@@ -712,3 +712,12 @@ function me_publishing_date( $the_date, $d, $post ) {
 }
 add_action( 'get_the_date', 'me_publishing_date', 99, 3 );
 
+function external_link($url, $post) {
+    $is_external = get_post_meta( $post->ID, 'is_external', true);
+    if ($is_external == '1') {
+    	return get_post_meta( $post->ID, 'url', true);
+    } else {
+    	return $url;
+    }
+}
+add_filter('the_permalink', 'external_link');

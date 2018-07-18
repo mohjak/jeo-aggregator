@@ -80,12 +80,12 @@ $arg_medium = array(
             <div class="sc-slice size-xs">
             <?php
             $args = array(
-                'posts_per_page'   => 10,
+                'posts_per_page'   => 4,
                 'orderby'          => 'post_date',
                 'order'            => 'DESC',
                 'post_type'        => array('post', 'link', 'sequence', 'map'),
                 'post_status'      => 'publish',
-                'pub_type'         => 'eye-original'
+                'pub_type'         => 'eye-original',
                 'suppress_filters' => true
             );
             $posts = get_posts( $args );

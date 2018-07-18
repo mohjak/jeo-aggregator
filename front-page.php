@@ -76,7 +76,7 @@ $arg_medium = array(
         </section>
 
         <section class="sc-container" id="eye-original">
-            <h2 class="alt">Eye Original</h2>
+            <img width="200" src="<?php echo get_stylesheet_directory_uri(); ?>/img/ME-EyeOriginal-banner.png" class="eye-original" style="width: 100%" />
             <div class="sc-slice size-xs">
             <?php
             $args = array(

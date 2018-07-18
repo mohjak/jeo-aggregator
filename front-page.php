@@ -57,7 +57,7 @@ $arg_medium = array(
                 <?php 
                 $args = array(
                     'post_type' => 'post',
-                    'tag' => 'news-digest',
+                    'pub_type'  => 'new-digest',
                     'orderby' => 'date',
                     'order'   => 'DESC',
                     'posts_per_page' => 1

@@ -35,12 +35,6 @@ if($highlight_posts_query->have_posts()) :
     <?php
     while($highlight_posts_query->have_posts()) :
       $highlight_posts_query->the_post();
-      $is_external = get_post_meta( get_the_ID(), 'is_external', true);
-	  if ($is_external == '1') {
-	    $link = get_post_meta( get_the_ID(), 'url', true);
-	  } else {
-	    $link = get_the_permalink();
-	  }
       ?>
       <li class="highlight-posts-item">
         <article id="<?php echo $instance['panels_info']['id']; ?>-highlight-posts-<?php the_ID(); ?>">

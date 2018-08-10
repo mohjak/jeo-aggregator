@@ -1,11 +1,15 @@
 <?php
 $query_args = newsroom_pb_parse_query($instance['posts']);
-$query_args['posts_per_page'] = intval($instance['per_row']) + 1;
+$query_args['posts_per_page'] = 1;
 $query_args['without_map_query'] = 1;
-$highlight_posts_query = new WP_Query($query_args);
-if($highlight_posts_query->have_posts()) :
-  $highlight_posts_query->the_post();
+$query_args['post__not_in'] = $GLOBALS['excluded_post'];
+$query_args['meta_query'] = array(array('key' => '_thumbnail_id'));
+$highlight_post = new WP_Query($query_args);
+if($highlight_post->have_posts()) :
+  $highlight_post->the_post();
   echo '<h2>' . $instance['title'] . '</h2>';
+  $post_id = get_the_ID();
+  array_push($GLOBALS['excluded_post'] , $post_id);
   ?>
   <div class="newsroom-highlight-posts-<?php echo $instance['style'] ?>">
     <article id="<?php echo $instance['panels_info']['id']; ?>-highlight-posts-<?php the_ID(); ?>">
@@ -33,8 +37,15 @@ if($highlight_posts_query->have_posts()) :
   <div class="newsroom-highlight-headline-posts">
     <ul class="highlight-posts-posts">
     <?php
+    $query_args = newsroom_pb_parse_query($instance['posts']);
+    $query_args['posts_per_page'] = intval($instance['per_row']);
+    $query_args['without_map_query'] = 1;
+    $query_args['post__not_in'] = $GLOBALS['excluded_post'];
+    $highlight_posts_query = new WP_Query($query_args);
     while($highlight_posts_query->have_posts()) :
       $highlight_posts_query->the_post();
+      $post_id = get_the_ID();
+      array_push($GLOBALS['excluded_post'] , $post_id);
       ?>
       <li class="highlight-posts-item">
         <article id="<?php echo $instance['panels_info']['id']; ?>-highlight-posts-<?php the_ID(); ?>">

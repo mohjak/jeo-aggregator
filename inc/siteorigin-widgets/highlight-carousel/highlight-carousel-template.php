@@ -2,6 +2,15 @@
 $query_args = newsroom_pb_parse_query($instance['posts']);
 $query_args['posts_per_page'] = 6;
 $query_args['without_map_query'] = 1;
+$query_args['meta_query'] = array(array('key' => '_thumbnail_id'));
+$query_args['post__not_in'] = $GLOBALS['excluded_post'];
+$query_args['tax_query'] = array(
+array(
+  'taxonomy' => 'pub_type',
+  'field'    => 'slug',
+  'terms'    => array( 'new-digest' ),
+  'operator' => 'NOT IN',
+));
 $highlight_query = new WP_Query($query_args);
 if($highlight_query->have_posts()) :
   ?>
@@ -10,6 +19,8 @@ if($highlight_query->have_posts()) :
     <?php
     while($highlight_query->have_posts()) :
       $highlight_query->the_post();
+      $post_id = get_the_ID();
+      array_push($GLOBALS['excluded_post'] , $post_id);
       ?>
       <li class="highlight-carousel-item">
         <article id="highlight-carousel-<?php the_ID(); ?>">

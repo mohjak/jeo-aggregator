@@ -42,6 +42,7 @@ $arg_medium = array(
     'return'             => 'url',
     'background_fill'    => null
 );
+$GLOBALS['excluded_post'] = array();
 ?>
 		
 <div class="main">

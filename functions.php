@@ -56,11 +56,20 @@ function newsroom_pb_parse_query($pb_query) {
 		$query['tax_query'] = array();
 		foreach($tax_args as $tax_arg) {
 			$tax_arg = explode(':', $tax_arg);
-			$query['tax_query'][] = array(
-				'taxonomy' => $tax_arg[0],
-				'field' => 'slug',
-				'terms' => $tax_arg[1]
-			);
+			if ( '-' == substr($tax_arg[1], 0, 1) ) {
+				$query['tax_query'][] = array(
+					'taxonomy' => $tax_arg[0],
+					'field' => 'slug',
+					'terms' => substr($tax_arg[1], 1),
+					'operator' => 'NOT IN',
+				);
+			} else {
+				$query['tax_query'][] = array(
+					'taxonomy' => $tax_arg[0],
+					'field' => 'slug',
+					'terms' => $tax_arg[1]
+				);	
+			}
 		}
 	}
 	return $query;

@@ -58,7 +58,7 @@
 		<div class="footer-contact">
 			<p>
 				<a href="mailto:editor@mekongeye.com">editor@mekongeye.com</a><br>
-				Address 518/5 Maneeya Center Bldg., 10th Flr.,<br>
+				518/5 Maneeya Center Bldg., 10th Flr.,<br>
 				Ploenchit Rd., Pathumwan,<br>
 				Bangkok, 10330<br>
 				Thailand

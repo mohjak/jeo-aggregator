@@ -49,7 +49,6 @@
 
 		<div class="footer-sponsors">
 			<p>
-				<a href="#" style="width: 180px;"><img src="<?php bloginfo('stylesheet_directory');?>/images/SIDA-Logo-BW.png" alt="Sweden Sveriage"></a>
 				<a href="http://earthjournalism.net" style="width: 150px;"><img src="<?php bloginfo('stylesheet_directory');?>/images/ejn-logo-hi.png" alt="Earth Journalism Network"></a>
 				<a href="https://www.internews.org" style="width: 180px;"><img src="<?php bloginfo('stylesheet_directory');?>/images/internews-logo-colorized.png" alt="Internews"></a>
 			</p>

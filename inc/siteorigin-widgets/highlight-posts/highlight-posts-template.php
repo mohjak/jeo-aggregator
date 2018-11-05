@@ -10,12 +10,19 @@ if($highlight_post->have_posts()) :
   echo '<h2>' . $instance['title'] . '</h2>';
   $post_id = get_the_ID();
   array_push($GLOBALS['excluded_post'] , $post_id);
+  $data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
+  if ($data_set_post == '1') {
+    $tracking = 'onclick="trackOutboundLink('. get_the_permalink() .');';  
+  }else {
+    $tracking = '';
+  }
+  
   ?>
   <div class="newsroom-highlight-posts-<?php echo $instance['style'] ?>">
     <article id="<?php echo $instance['panels_info']['id']; ?>-highlight-posts-<?php the_ID(); ?>">
       <?php if(has_post_thumbnail()) : ?>
         <div class="highlight-posts-thumbnail">
-          <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_post_thumbnail(array(320,320)); ?></a>
+          <a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>"><?php the_post_thumbnail(array(320,320)); ?></a>
         </div>
       <?php endif; ?>
       <div class="highlight-posts-post-content">
@@ -25,7 +32,7 @@ if($highlight_post->have_posts()) :
             echo '<p class="kicker">'. $kicker[0] .'</p>';
         }
         ?>
-        <h2><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+        <h2><a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
         <p class="date"><?php echo get_the_date(); ?></p>
         <?php
         $pub_name = get_post_meta( get_the_ID(), 'pub_name', true);
@@ -46,11 +53,17 @@ if($highlight_post->have_posts()) :
       $highlight_posts_query->the_post();
       $post_id = get_the_ID();
       array_push($GLOBALS['excluded_post'] , $post_id);
+      $data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
+      if ($data_set_post == '1') {
+        $tracking = 'onclick="trackOutboundLink('. get_the_permalink() .');';  
+      }else {
+        $tracking = '';
+      }
       ?>
       <li class="highlight-posts-item">
         <article id="<?php echo $instance['panels_info']['id']; ?>-highlight-posts-<?php the_ID(); ?>">
           <div class="highlight-posts-post-content">
-            <a href="<?php the_permalink(); ?>" class="headline" title="<?php the_title(); ?>"><h2><?php the_title(); ?></h2></a>
+            <a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> class="headline" title="<?php the_title(); ?>"><h2><?php the_title(); ?></h2></a>
             <p class="date"><?php echo get_the_date(); ?>
             <?php
               $pub_name = get_post_meta( get_the_ID(), 'pub_name', true);

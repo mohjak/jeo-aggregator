@@ -21,6 +21,12 @@ if($highlight_query->have_posts()) :
       $highlight_query->the_post();
       $post_id = get_the_ID();
       array_push($GLOBALS['excluded_post'] , $post_id);
+      $data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
+        if ($data_set_post == '1') {
+          $tracking = 'onclick="trackOutboundLink('. get_the_permalink() .');';  
+        }else {
+          $tracking = '';
+        }
       ?>
       <li class="highlight-carousel-item">
         <article id="highlight-carousel-<?php the_ID(); ?>">
@@ -28,7 +34,7 @@ if($highlight_query->have_posts()) :
             <?php the_post_thumbnail('highlight-carousel'); ?>
           </div>
           <div class="highlight-carousel-post-content">
-            <h2><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+            <h2><a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
             <p class="date"><?php echo get_the_date(); ?></p>
             <?php the_excerpt(); ?>
           </div>

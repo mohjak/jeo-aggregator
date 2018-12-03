@@ -23,6 +23,9 @@ if($highlight_post->have_posts()) :
       <?php if(has_post_thumbnail()) : ?>
         <div class="highlight-posts-thumbnail">
           <a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>"><?php the_post_thumbnail(array(320,320)); ?></a>
+          <?php if (get_post_meta($post->ID, 'is_label', true) == "1") ?>
+          <a href="#"><span class="label">Belt, Road & the Environment</span></a>
+          <?php endif ?>
         </div>
       <?php endif; ?>
       <div class="highlight-posts-post-content">
@@ -64,6 +67,9 @@ if($highlight_post->have_posts()) :
         <article id="<?php echo $instance['panels_info']['id']; ?>-highlight-posts-<?php the_ID(); ?>">
           <div class="highlight-posts-post-content">
             <a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> class="headline" title="<?php the_title(); ?>"><h2><?php the_title(); ?></h2></a>
+            <?php if (get_post_meta($post->ID, 'is_label', true) == "1") ?>
+            <a href="#"><span class="label">Belt, Road & the Environment</span></a>
+            <?php endif ?>
             <p class="date"><?php echo get_the_date(); ?>
             <?php
               $pub_name = get_post_meta( get_the_ID(), 'pub_name', true);

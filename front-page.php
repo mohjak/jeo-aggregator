@@ -107,7 +107,11 @@ $GLOBALS['excluded_post'] = array();
                             <?php
                             $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
                             ?>
-                            <h4><?php echo $post->post_title; ?><i class="dateline"> <?php echo $author_name; ?></i></h4>
+                            <h4><?php echo $post->post_title; ?>
+                            <?php if (get_post_meta(get_the_ID(), 'is_label', true) == "1"): ?>
+                            <a href="#"><span class="label">Belt, Road & the Environment</span></a>
+                            <?php endif; ?>
+                            <i class="dateline"> <?php echo $author_name; ?></i></h4>
                         </div>
                     </a>
                 </article>

@@ -21,6 +21,9 @@ if ($pub_name != '' and $url != '') {
 					<header class="post-header">
 						<?php echo get_the_term_list($post->ID, 'publisher', '', ', ', ''); ?>
 						<h1 class="title"><?php the_title(); ?></h1>
+						<?php if (get_post_meta(get_the_ID(), 'is_label', true) == "1"): ?>
+			            <a href="#"><span class="label">Belt, Road & the Environment</span></a>
+			            <?php endif; ?>
 						<h2 class="subhead"><?php the_excerpt(); ?></h2>
 					</header>
 					<?php if(has_post_thumbnail()):?>

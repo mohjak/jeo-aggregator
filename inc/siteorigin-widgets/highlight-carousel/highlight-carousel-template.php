@@ -38,7 +38,7 @@ if($highlight_query->have_posts()) :
             <h2>
               <a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>"><?php the_title(); ?></a>
               <?php if (get_post_meta(get_the_ID(), 'is_label', true) == "1"): ?>
-              <br><a href="#"><span class="label">Belt, Road & the Environment</span></a>
+              <a href="#"><span class="label">Belt, Road & the Environment</span></a>
               <?php endif; ?>
             </h2>
             <p class="date"><?php echo get_the_date(); ?></p>

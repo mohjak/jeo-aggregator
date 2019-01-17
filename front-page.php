@@ -94,6 +94,9 @@ $GLOBALS['excluded_post'] = array();
                 $author_name = get_post_meta( $post->ID, 'author_name', true );
             ?>
                 <article class="sc-story">
+                    <?php if (get_post_meta(get_the_ID(), 'is_label', true) == "1"): ?>
+                    <a href="#"><span class="label">Belt, Road & the Environment</span></a>
+                    <?php endif; ?>
                     <?php 
                     $link = get_post_meta($post->ID, 'link_target', true);
                     if ($link != '') {
@@ -110,9 +113,6 @@ $GLOBALS['excluded_post'] = array();
                             <h4><?php echo $post->post_title; ?>
                         </div>
                     </a>
-                    <?php if (get_post_meta(get_the_ID(), 'is_label', true) == "1"): ?>
-                    <a href="#"><span class="label">Belt, Road & the Environment</span></a>
-                    <?php endif; ?>
                     <i class="dateline"> <?php echo $author_name; ?></i></h4>
                 </article>
             <?php 

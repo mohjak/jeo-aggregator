@@ -111,9 +111,9 @@ $GLOBALS['excluded_post'] = array();
                             $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
                             ?>
                             <h4><?php echo $post->post_title; ?>
+                            <i class="dateline"> <?php echo $author_name; ?></i></h4>
                         </div>
                     </a>
-                    <i class="dateline"> <?php echo $author_name; ?></i></h4>
                 </article>
             <?php 
             }

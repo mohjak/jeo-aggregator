@@ -11,10 +11,18 @@ wp_enqueue_script('lockfixed', get_stylesheet_directory_uri() . '/js/jquery.lock
 				$post_class = (($i % 2) ? 'alpha' : 'omega') . ' four columns';
 				$post_class = 'alpha omega four columns';
 				?>
+				<?php 
+				$data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
+				if ($data_set_post == '1') {
+					$tracking = 'onclick="trackOutboundLink('. get_the_permalink() .');"';  
+				}else {
+					$tracking = '';
+				}
+				?>
 				<li id="post-<?php the_ID(); ?>" <?php post_class('post-item ' . $post_class); ?>>
 					<article>
 						<header class="post-header">
-							<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+							<a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>">
 								<?php
 								if(has_post_thumbnail())
 									the_post_thumbnail('post-thumb');
@@ -22,7 +30,12 @@ wp_enqueue_script('lockfixed', get_stylesheet_directory_uri() . '/js/jquery.lock
 									echo '<img src="' . get_post_meta($post->ID, 'picture', true) . '" />';
 								?>
 							</a>
-							<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+							<h2>
+								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+								<?php if (get_post_meta($post->ID, 'is_label', true) == "1"): ?>
+								<br><a href="#"><span class="label">Belt and Road</span></a>
+								<?php endif; ?>
+							</h2>
 							<p class="meta clearfix">
 								<span class="date">
 									<span class="lsf">&#xE15e;</span>

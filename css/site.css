@@ -663,3 +663,25 @@ and (max-device-width : 1024px) {
     }
   }
 
+.new-digest-widget .title {
+  float: left;
+}
+.new-digest-widget .date {
+  float: right;
+}
+
+.new-digest-links .view {
+  float: left;
+  padding: 10px 30px;
+  background-color: #d5e59d;
+}
+
+.new-digest-links .subscribe {
+  float: right;
+  padding: 10px 30px;
+  background-color: #d5e59d;
+}
+
+#ctf {
+  width: 100%;
+}

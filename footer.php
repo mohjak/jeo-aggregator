@@ -49,7 +49,6 @@
 
 		<div class="footer-sponsors">
 			<p>
-				<a href="#" style="width: 180px;"><img src="<?php bloginfo('stylesheet_directory');?>/images/mpe-logo-colorized.png" alt="Mekong Partnership for the Environment"></a>
 				<a href="http://earthjournalism.net" style="width: 150px;"><img src="<?php bloginfo('stylesheet_directory');?>/images/ejn-logo-hi.png" alt="Earth Journalism Network"></a>
 				<a href="https://www.internews.org" style="width: 180px;"><img src="<?php bloginfo('stylesheet_directory');?>/images/internews-logo-colorized.png" alt="Internews"></a>
 			</p>
@@ -58,8 +57,8 @@
 		<div class="footer-contact">
 			<p>
 				<a href="mailto:editor@mekongeye.com">editor@mekongeye.com</a><br>
-				Unit 6, 28th Floor, CRC Tower,&nbsp;All Seasons Place<br>
-				87/2 Wireless Road, Pathumwan<br>
+				518/5 Maneeya Center Bldg., 10th Flr.,<br>
+				Ploenchit Rd., Pathumwan,<br>
 				Bangkok, 10330<br>
 				Thailand
 			</p>
@@ -75,5 +74,19 @@
 	<!-- local scripts -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="/wp-content/themes/mekongeye/assets/javascript/global.js"></script>
+	<script>
+/**
+* Function that tracks a click on an outbound link in Analytics.
+* This function takes a valid URL string as an argument, and uses that URL string
+* as the event label. Setting the transport method to 'beacon' lets the hit be sent
+* using 'navigator.sendBeacon' in browser that support it.
+*/
+var trackOutboundLink = function(url) {
+   ga('send', 'event', 'outbound', 'click', url, {
+     'transport': 'beacon',
+     'hitCallback': function(){document.location = url;}
+   });
+}
+</script>
 </body>
 </html>

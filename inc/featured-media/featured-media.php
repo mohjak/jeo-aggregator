@@ -81,7 +81,7 @@ class Newsroom_Featured_Media {
       case 'image':
         $src = wp_get_attachment_image_src(get_post_thumbnail_id(), 'kicker');
         echo '<div class="kicker-image-container">';
-        the_post_thumbnail('kicker');
+        the_post_thumbnail(array(800,650));
         echo '<div class="image-caption">' . get_post(get_post_thumbnail_id())->post_excerpt . '</div>';
         echo '</div>';
         break;

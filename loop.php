@@ -3,15 +3,23 @@
 		<li id="post-<?php the_ID(); ?>" <?php post_class('post-item four columns'); ?>>
 			<article>
 				<header class="post-header">
-					<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+					<?php 
+					$data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
+					if ($data_set_post == '1') {
+						$tracking = 'onclick="trackOutboundLink('. get_the_permalink() .');"';
+					}else {
+						$tracking = '';
+					}
+					?>
+					<a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>">
 						<?php
 						if(has_post_thumbnail())
-							the_post_thumbnail('post-thumb');
+							the_post_thumbnail(array(800, 650));
 						else
-							echo '<img src="' . get_post_meta($post->ID, 'picture', true) . '" />';
+							echo '<img width="800" hight="650" src="' . get_post_meta($post->ID, 'picture', true) . '" />';
 						?>
 					</a>
-					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+					<h2><a href="<?php the_permalink(); ?>" <?php echo $tracking; ?>><?php the_title(); ?></a></h2>
 					<p class="meta clearfix">
 						<span class="date">
 							<span class="lsf">&#xE15e;</span>

@@ -21,11 +21,16 @@ if ($pub_name != '' and $url != '') {
 					<header class="post-header">
 						<?php echo get_the_term_list($post->ID, 'publisher', '', ', ', ''); ?>
 						<h1 class="title"><?php the_title(); ?></h1>
+						<?php if (get_post_meta(get_the_ID(), 'is_label', true) == "1"): ?>
+			            <a href="#"><span class="label">Belt and Road</span></a>
+			            <?php endif; ?>
 						<h2 class="subhead"><?php the_excerpt(); ?></h2>
 					</header>
+					<?php if(has_post_thumbnail()):?>
 						<div id="main-map" class="stage-map">
 							<?php newsroom_featured_media(); ?>
 						</div>
+					<?php endif ?>
 				</div>
 			</div>
 		</section>
@@ -36,7 +41,7 @@ if ($pub_name != '' and $url != '') {
 					<div class="seven columns">
 						<div class="post-description">
 							<p class="by">By <strong><?php echo $author ?></strong></p>
-							<p class="date"><i><?php echo $location?>,</i> <?php echo get_the_date(); ?> </p>
+							<p class="date"><i><?php echo ($location != '' ? $location .',' : '');?></i> <?php echo get_the_date(); ?> </p>
 							<p class="source"><?php echo $pub_name ?></p>
 							<?php the_content(); ?>
 						</div>
@@ -82,7 +87,5 @@ if ($pub_name != '' and $url != '') {
 		</section>
 	</article>
 <?php endif; ?>
-
-<?php get_template_part('section', 'main-widget'); ?>
 
 <?php get_footer(); ?>

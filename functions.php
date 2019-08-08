@@ -46,6 +46,7 @@ if(class_exists('SiteOrigin_Widget')) {
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/square-posts/square-posts.php');
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/list-posts/list-posts.php');
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/list-images/list-images.php');
+	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/highlight-posts/highlight-posts.php');	
 }
 
 function newsroom_pb_parse_query($pb_query) {
@@ -55,11 +56,20 @@ function newsroom_pb_parse_query($pb_query) {
 		$query['tax_query'] = array();
 		foreach($tax_args as $tax_arg) {
 			$tax_arg = explode(':', $tax_arg);
-			$query['tax_query'][] = array(
-				'taxonomy' => $tax_arg[0],
-				'field' => 'slug',
-				'terms' => $tax_arg[1]
-			);
+			if ( '-' == substr($tax_arg[1], 0, 1) ) {
+				$query['tax_query'][] = array(
+					'taxonomy' => $tax_arg[0],
+					'field' => 'slug',
+					'terms' => substr($tax_arg[1], 1),
+					'operator' => 'NOT IN',
+				);
+			} else {
+				$query['tax_query'][] = array(
+					'taxonomy' => $tax_arg[0],
+					'field' => 'slug',
+					'terms' => $tax_arg[1]
+				);	
+			}
 		}
 	}
 	return $query;
@@ -205,9 +215,6 @@ function ekuatorial_enqueue_marker_script() {
 	wp_enqueue_script('ekuatorial.markers');
 }
 add_action('wp_footer', 'ekuatorial_enqueue_marker_script');
-
-// slideshow
-include(STYLESHEETPATH . '/inc/slideshow.php');
 
 // ajax calendar
 include(STYLESHEETPATH . '/inc/ajax-calendar.php');
@@ -693,3 +700,33 @@ function subscriber_widgets() {
 
 }
 add_action( 'widgets_init', 'subscriber_widgets' );
+
+function me_publishing_date( $the_date, $d, $post ) {
+	$value = get_post_meta( $post->ID, 'publish_date', true);
+	if ( $value == '' ) {
+		return $the_date;
+	} else {
+		$date = DateTime::createFromFormat( 'Y-m-d', $value );
+		if ($date == false) {
+			return $the_date;
+		}
+		$ts = $date->format('U'); 
+	}
+	if ($d != '') {
+		$value = $date->format($d);
+	} else {
+		$value = strftime("%B %d, %Y", $ts);
+	}
+	return $value;
+}
+add_action( 'get_the_date', 'me_publishing_date', 99, 3 );
+
+function external_link( $url, $post, $leavename=false ) {
+	$is_external = get_post_meta( $post->ID, 'is_external', true);
+    if ($is_external == '1') {
+    	return get_post_meta( $post->ID, 'url', true);
+    } else {
+    	return $url;
+    }
+}
+add_filter( 'post_link', 'external_link', 10, 3 );

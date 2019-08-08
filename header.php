@@ -22,6 +22,7 @@
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="shortcut icon" href="<?php bloginfo('stylesheet_directory'); ?>/img/favicon.ico" type="image/x-icon" />
 <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(get_bloginfo('language')); ?>>

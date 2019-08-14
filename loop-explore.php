@@ -14,7 +14,7 @@ wp_enqueue_script('lockfixed', get_stylesheet_directory_uri() . '/js/jquery.lock
 				<?php 
 				$data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
 				if ($data_set_post == '1') {
-					$tracking = 'onclick="trackOutboundLink(\''. get_the_permalink() .'\');"';  
+					$tracking = 'onclick="trackOutboundLink("'. get_the_permalink() .'");"';  
 				}else {
 					$tracking = '';
 				}

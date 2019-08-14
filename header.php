@@ -55,7 +55,7 @@
 <a href="#nav" title="Show navigation"></a>
 <a href="#" title="Hide navigation"></a>
 						<ul>
-							<?php wp_nav_menu(array(
+							<?php wp_nav_menu(array('theme_location' => 'header_menu',
 								'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s<li><a href="#submit" class="submit-story">' . __('Submit a story', 'ekuatorial') . '</a></li></ul>'
 							)); ?>
 						</ul>

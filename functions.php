@@ -751,8 +751,7 @@ function dataset_report(){
 	    $posts = get_posts(array(
 			'posts_per_page'	=> -1,
 			'post_type'			=> 'post',
-			'meta_key'		=> 'data_set',
-			// 'meta_key'		=> 'dataset_content',
+			'meta_key'		=> 'dataset_content',
 			'meta_value'	=> '1',
 			'date_query' => array(
 		        array(
@@ -778,7 +777,7 @@ function dataset_report(){
 	$content .= '</div>';
 	return $content;
 }
-add_shortcode( 'foobar', 'dataset_report' );
+add_shortcode( 'dataset', 'dataset_report' );
 
 function wpb_custom_new_menu() {
   register_nav_menus(

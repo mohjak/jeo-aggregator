@@ -14,6 +14,7 @@
 
 		<nav class="footer-directional">
 			<ul>
+				<?php wp_nav_menu( array( 'theme_location' => 'footer-section-1' ) ); ?>
 				<li><a href="/">Home</a></li>
 				<li><a href="#nameplate">Top of Page</a></li>
 			</ul>
@@ -21,6 +22,7 @@
 
 		<nav class="footer-utility">
 			<ul>
+				<?php wp_nav_menu( array( 'theme_location' => 'footer-section-2' ) ); ?>
 				<li><a href="/contact-us/">Contact Us</a></li>
 				<li><a href="/for-journalists/">For Journalists</a></li>
 				<li><a href="/terms-of-use/">Terms of Use</a></li>
@@ -30,6 +32,7 @@
 		<div class="footer-partners">
 			<h6>Partner Sites</h6>
 			<ul>
+				<?php wp_nav_menu( array( 'theme_location' => 'footer-section-3' ) ); ?>
 				<li><a href="https://www.facebook.com/groups/1488115371456079/?fref=ts">Mekong Matters Journalism Network</a></li>
 				<li><a href="https://opendevelopmentmekong.net/">Open Development Mekong</a></li>
 				<li><a href="http://mekongcitizen.org/">Mekong Citizen</a></li>

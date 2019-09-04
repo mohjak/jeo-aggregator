@@ -734,7 +734,7 @@ add_filter( 'post_link', 'external_link', 10, 3 );
 function custom_toolbar_link($wp_admin_bar) {
     $args = array(
         'id' => 'dataset-report',
-        'title' => 'Data Set Report', 
+        'title' => 'Dataset Report', 
         'href' => '/report-dataset'
     );
     $wp_admin_bar->add_node($args);

@@ -730,3 +730,62 @@ function external_link( $url, $post, $leavename=false ) {
     }
 }
 add_filter( 'post_link', 'external_link', 10, 3 );
+
+function custom_toolbar_link($wp_admin_bar) {
+    $args = array(
+        'id' => 'dataset-report',
+        'title' => 'Dataset Report', 
+        'href' => '/report-dataset'
+    );
+    $wp_admin_bar->add_node($args);
+}
+add_action('admin_bar_menu', 'custom_toolbar_link', 999);
+
+function dataset_report(){
+	$content = '<div class="accordion" id="accordionExample">';
+
+	$start = $month = strtotime(date('Y-m-d'));
+	$end = strtotime('2018-01-01');
+	while($month > $end)
+	{
+	    $posts = get_posts(array(
+			'posts_per_page'	=> -1,
+			'post_type'			=> 'post',
+			'meta_key'		=> 'dataset_content',
+			'meta_value'	=> '1',
+			'date_query' => array(
+		        array(
+		            'after'     => date('Y-m-1', $month),
+		            'before'    => date('Y-m-t', $month),
+		            'inclusive' => true,
+		        ),
+		    ),
+		));
+		$content.='<div class="card"><div class="card-header" id="head-'.date('F-Y', $month).'">';
+		$content.='<h2 class="mb-0"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#col-'.date('F-Y', $month).'" aria-expanded="true" aria-controls="col-">'.date('F Y', $month).'  ('.count($posts).')</button></h2></div>';
+		$content.='<div id="col-'.date('F-Y', $month).'" class="collapse" aria-labelledby="head-'.date('F-Y', $month).'" data-parent="#accordionExample"><div class="card-body">';
+		if( $posts ) {
+			$content.='<ul>';
+			foreach( $posts as $post ) {
+				$post_link = '<li><a href="'.get_permalink($post).'">'.$post->post_title.'</a></li>';
+				$content.=$post_link;
+			}
+		}
+		$content.='</ul></div></div></div>';
+		$month = strtotime("-1 month", $month);
+	}
+	$content .= '</div>';
+	return $content;
+}
+add_shortcode( 'dataset', 'dataset_report' );
+
+function wpb_custom_new_menu() {
+  register_nav_menus(
+    array(
+      'footer-section-1' => __( 'Footer section 1' ),
+      'footer-section-2' => __( 'Footer section 2' ),
+      'footer-section-3' => __( 'Footer section 3' ),
+    )
+  );
+}
+add_action( 'init', 'wpb_custom_new_menu' );

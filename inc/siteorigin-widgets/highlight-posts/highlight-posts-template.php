@@ -12,7 +12,7 @@ if($highlight_post->have_posts()) :
   array_push($GLOBALS['excluded_post'] , $post_id);
   $data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
   if ($data_set_post == '1') {
-    $tracking = 'onclick="trackOutboundLink('. get_the_permalink() .');"';
+    $tracking = 'onclick="trackOutboundLink(\''. get_the_permalink() .'\');"';  
   }else {
     $tracking = '';
   }
@@ -60,7 +60,7 @@ if($highlight_post->have_posts()) :
       array_push($GLOBALS['excluded_post'] , $post_id);
       $data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
       if ($data_set_post == '1') {
-        $tracking = 'onclick="trackOutboundLink('. get_the_permalink() .');';  
+        $tracking = 'onclick="trackOutboundLink(\''. get_the_permalink() .'\');"';  
       }else {
         $tracking = '';
       }

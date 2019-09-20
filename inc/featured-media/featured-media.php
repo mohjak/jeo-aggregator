@@ -108,7 +108,7 @@ class Newsroom_Featured_Media {
 
   function the_content($content) {
     global $post;
-    if('post_media' == get_post_meta($post->ID, 'newsroom_featured_media_type', true)) {
+    if($post && 'post_media' == get_post_meta($post->ID, 'newsroom_featured_media_type', true)) {
       $content = str_replace(get_post_meta($post->ID, '_newsroom_first_media', true), '', $content);
     }
     return $content;

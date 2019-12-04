@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * JEO Post Zoom
  */
 
@@ -14,13 +14,14 @@ class JEO_Post_Zoom {
 	}
 
 	function zoom_input($post) {
-		$geocode_zoom = get_post_meta($post->ID, 'geocode_zoom', true);
+        if($post) {
+            $geocode_zoom = get_post_meta($post->ID, 'geocode_zoom', true);
 		?>
 		<p>
 		<?php _e('Zoom', 'ekuatorial'); ?>:
 		<input type="text" id="geocode_zoom" name="geocode_zoom" value="<?php if($geocode_zoom) echo $geocode_zoom; ?>" />
 		</p>
-		<?php
+        <?php }
 	}
 
 	function save_post($post_id) {

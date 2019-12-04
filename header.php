@@ -17,7 +17,7 @@
 		echo ' | ' . __('Page', 'ekuatorial') . max($paged, $page);
 
 	?></title>
-<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="profile" href="https://gmpg.org/xfn/11" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="shortcut icon" href="<?php bloginfo('stylesheet_directory'); ?>/img/favicon.ico" type="image/x-icon" />
@@ -61,10 +61,10 @@
 						</ul>
 					</nav>
 				</div>
-<form role="search" method="get" id="search" action="<?php bloginfo('home'); ?>/"> 
-    <div> 
-        <input type="text" name="s" id="s" placeholder="<?php _e('Search here...', 'jeo'); ?>" value="<?php if(isset($_GET['s'])) echo $_GET['s']; ?>" /> 
-    </div> 
+<form role="search" method="get" id="search" action="<?php echo home_url(); ?>/">
+    <div>
+        <input type="text" name="s" id="s" placeholder="<?php _e('Search here...', 'jeo'); ?>" value="<?php if(isset($_GET['s'])) echo $_GET['s']; ?>" />
+    </div>
 </form>
 				<div class="four columns">
 					<?php if(function_exists('qtranxf_getLanguage')) : ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Template Name: Content Page Vertical
 */
@@ -8,14 +8,15 @@ get_header(); ?>
 <?php
 wp_reset_query();
 $topic = wp_get_post_terms($id, 'topic', array('fields' => 'all'));
-$topic_name = $topic[0]->name;
-$topic_desc = $topic[0]->description;
+$topic_name = isset($topic[0]) ? $topic[0]->name : '';
+$topic_desc = isset($topic[0]) ? $topic[0]->description : '';
 $region = wp_get_post_terms($id, 'region', array('fields' => 'all'));
-$region_name = $region[0]->name;
-$region_desc = $region[0]->description;
+$region_name = isset($region[0]) ? $region[0]->name : '';
+$region_desc = isset($region[0]) ? $region[0]->description : '';
 $pub_type = wp_get_post_terms($id, 'pub_type', array('fields' => 'all'));
-$pub_type_name = $pub_type[0]->name;
-$pub_type_desc = $pub_type[0]->description;
+$pub_type_name = isset($pub_type[0]) ? $pub_type[0]->name : '';
+// by mohjak 2019-11-24 tag excel line 4 issue#120
+$pub_type_desc = isset($pub_type[0]) ? $pub_type[0]->description : '';
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $args = array(
     'posts_per_page'   => 10,
@@ -72,7 +73,7 @@ if ($pub_name != '' and $source_link != '') {
         <div class="sv-slice">
             <?php foreach ( $wp_query->posts as $post ) { ?>
             <article class="sv-story">
-                <?php 
+                <?php
                 if (has_post_thumbnail($post->ID)) {
                 ?>
                     <div class="sv-story__hd">
@@ -81,7 +82,8 @@ if ($pub_name != '' and $source_link != '') {
                         if ($link != '') {
                             echo '<a href="' . $link .'" target="_blank">';
                         } else {
-                            echo '<a href="' . post_permalink($post->ID) .'" target="_blank">';
+                            // by mohjak 2019-10-01
+                            echo '<a href="' . get_permalink($post->ID) .'" target="_blank">';
                         }
                         $thumbnail = get_the_post_thumbnail( $post->ID );
                         echo $thumbnail;
@@ -95,20 +97,21 @@ if ($pub_name != '' and $source_link != '') {
                 <div class="sv-story__bd">
                     <?php
                     $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
-                    if ($kicker[0] != '') {
+                    if (isset($kicker[0]) && $kicker[0] != '') {
                     ?>
                         <p class="kicker"><?php echo $kicker[0]; ?></p>
                     <?php
                     }
                     ?>
-                    
+
                     <h2>
                         <?php
                         $link = get_post_meta($post->ID, 'link_target', true);
                         if ($link != '') {
                             echo '<a href="' . $link .'" target="_blank">';
                         } else {
-                            echo '<a href="' . post_permalink($post->ID) .'" target="_blank">';
+                            // by mohjak 2019-10-01
+                            echo '<a href="' . get_permalink($post->ID) .'" target="_blank">';
                         }
                         ?><?php echo $post->post_title ?></a>
                     </h2>
@@ -140,12 +143,13 @@ if ($pub_name != '' and $source_link != '') {
                     ?>
                     <p class="more">
                         <?php
-                        
+
                         $link = get_post_meta($post->ID, 'link_target', true);
                         if ($link != '') {
                             echo '<a href="' . $link .'" target="_blank">';
                         } else {
-                            echo '<a href="' . post_permalink($post->ID) .'">';
+                            // by mohjak 2019-10-01
+                            echo '<a href="' . get_permalink($post->ID) .'">';
                         }
                         echo $custom_link_text;
                         ?>
@@ -170,7 +174,7 @@ if ($pub_name != '' and $source_link != '') {
         <section class="sc-container" id="recent">
                 <h2 class="alt">News Stream</h2>
                 <div class="sc-slice size-xs">
-                <?php 
+                <?php
                 $args = array(
                     'posts_per_page'   => 10,
                     'orderby'          => 'post_date',
@@ -190,19 +194,25 @@ if ($pub_name != '' and $source_link != '') {
                             echo '<a href="' . $link .'" target="_blank">';
                         }
                         else {
-                            echo '<a href="' . post_permalink($post->ID) .'">';
+                            // by mohjak 2019-10-01
+                            echo '<a href="' . get_permalink($post->ID) .'">';
                         }
                         ?>
                             <div class="sc-story__bd">
-                                <?php
+                            <?php
                             $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
-                            $pub_name = get_post_meta( $post->ID, 'pub_name', true);
+                            // by mohjak 2019-11-24 tag excel line 6 issue#120
+                            $pub_name = get_post_meta($post->ID, 'pub_name', true);
                             ?>
-                            <h4><?php echo ($kicker[0] == '' ? '' : '<b class="kicker">' . $kicker[0] . '</b> ');?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
+                            <h4><?php
+                                if (count($kicker) > 0 && isset($kicker[0])) {
+                                    // by mohjak 2019-11-24 Fix excel line 5 issue#120
+                                    echo ($kicker[0] == '') ? '' : '<b class="kicker">' . $kicker[0] . '</b> ';
+                                } ?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
                             </div>
                         </a>
                     </article>
-                <?php 
+                <?php
                 }
                 ?>
                 </div>
@@ -226,13 +236,14 @@ if ($pub_name != '' and $source_link != '') {
                     $author_name = get_post_meta( $post->ID, 'author_name', true );
                 ?>
                     <article class="sc-story">
-                        <?php 
+                        <?php
                         $link = get_post_meta($post->ID, 'link_target', true);
                         if ($link != '') {
                             echo '<a href="' . $link .'" target="_blank">';
                         }
                         else {
-                            echo '<a href="' . post_permalink($post->ID) .'">';
+                            // by mohjak 2019-10-01
+                            echo '<a href="' . get_permalink($post->ID) .'">';
                         }
                         ?>
                             <div class="sc-story__bd">
@@ -240,11 +251,14 @@ if ($pub_name != '' and $source_link != '') {
                             $kicker = wp_get_post_terms($post->ID, 'pub_type', array('fields' => 'names'));
                             $pub_name = get_post_meta( $post->ID, 'pub_name', true);
                             ?>
-                            <h4><?php echo ($kicker[0] == '' ? '' : '<b class="kicker">' . $kicker[0] . '</b> ');?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
+                            <h4><?php
+                            if (count($kicker) > 0 && isset($kicker[0])) {
+                                echo ($kicker[0] == '' ? '' : '<b class="kicker">' . $kicker[0] . '</b> ');
+                            } ?> <?php echo $post->post_title; ?> <em><?php echo $pub_name;?></em></h4>
                             </div>
                         </a>
                     </article>
-                <?php 
+                <?php
                 }
                 ?>
                 </div>

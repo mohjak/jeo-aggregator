@@ -81,7 +81,9 @@
 
 	<?php else : ?>
 
-		<?php query_posts(); if(have_posts()) : ?>
+        <?php
+            /* by mohjak 2019-11-21 excel line 17 issue#120 */
+            query_posts('posts_per_page=-1'); if(have_posts()) : ?>
 
 			<section id="last-stories" class="loop-section">
 				<div class="section-title">

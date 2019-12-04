@@ -11,10 +11,11 @@ wp_enqueue_script('lockfixed', get_stylesheet_directory_uri() . '/js/jquery.lock
 				$post_class = (($i % 2) ? 'alpha' : 'omega') . ' four columns';
 				$post_class = 'alpha omega four columns';
 				?>
-				<?php 
+				<?php
 				$data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
 				if ($data_set_post == '1') {
-					$tracking = 'onclick="trackOutboundLink(\''. get_the_permalink() .'\'');"';  
+                    // by mohjak: 2019-11-24 Fix Parse error:  syntax error, unexpected ')'
+					$tracking = 'onclick="trackOutboundLink(\'' . get_the_permalink() . '\'' . ');"';
 				}else {
 					$tracking = '';
 				}

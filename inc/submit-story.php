@@ -144,13 +144,15 @@ function ekuatorial_submit_post() {
 		$return['error'] = __('Could not save submission', 'ekuatorial');
 	}
 
-	header('Content Type: application/json');
+    // by mohjak 2019-11-24 Fix story submit issue
+    header('Content-Type: application/json');
 	echo json_encode($return);
 	exit;
 }
 
 function json_death($o) {
-	header('Content Type: application/json');
+    // by mohjak 2019-11-24 Fix story submit issue
+	header('Content-Type: application/json');
 	echo json_encode($o);
 	exit;
 }

@@ -2,7 +2,7 @@
 /*
 Template Name: Content Page
 */
-get_header(); 
+get_header();
 $map_id = get_post_meta( $post->ID, 'map_id', true);
 ?>
 
@@ -19,14 +19,14 @@ $map_id = get_post_meta( $post->ID, 'map_id', true);
     <?php
 wp_reset_query();
 $topic = wp_get_post_terms($id, 'topic', array('fields' => 'all'));
-$topic_name = $topic[0]->name;
-$topic_desc = $topic[0]->description;
+$topic_name = isset($topic[0]) ? $topic[0]->name : '';
+$topic_desc = isset($topic[0]) ? $topic[0]->description : '';
 $region = wp_get_post_terms($id, 'region', array('fields' => 'all'));
-$region_name = $region[0]->name;
-$region_desc = $region[0]->description;
+$region_name = isset($region[0]) ? $region[0]->name : '';
+$region_desc = isset($region[0]) ? $region[0]->description : '';
 $pub_type = wp_get_post_terms($id, 'pub_type', array('fields' => 'all'));
-$pub_type_name = $pub_type[0]->name;
-$pub_type_desc = $pub_type[0]->description;
+$pub_type_name = isset($pub_type[0]) ? $pub_type[0]->name : '';
+$pub_type_desc = isset($pub_type[0]) ? $pub_type[0]->description : '';
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $args = array(
     'posts_per_page'   => 12,

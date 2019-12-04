@@ -460,7 +460,7 @@ textarea {
 /*  -------------------------------------------------------
  *  Map component styling
  *  ------------------------------------------------------- */
-	
+
 #legend {
   position: absolute;
   z-index: 10000;
@@ -684,4 +684,9 @@ and (max-device-width : 1024px) {
 
 #ctf {
   width: 100%;
+}
+
+/* by mohjak 2019-11-27 Fix Footer Margin */
+.global-footer ul {
+  margin-left: 0;
 }

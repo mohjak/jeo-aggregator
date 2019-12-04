@@ -1,8 +1,8 @@
-<?php 
+<?php
 /*
 Template Name: Front Page
 */
-get_header(); 
+get_header();
 $arg_extra_large = array(
     'width'              => 1080,
     'height'             => 460,
@@ -44,7 +44,7 @@ $arg_medium = array(
 );
 $GLOBALS['excluded_post'] = array();
 ?>
-		
+
 <div class="main">
     <div id="stories-left">
     <?php while ( have_posts() ) : the_post(); ?>
@@ -55,7 +55,7 @@ $GLOBALS['excluded_post'] = array();
         <section class="sc-container" id="new-digest">
             <img width="200" src="<?php echo get_stylesheet_directory_uri(); ?>/img/ME-NewsDigest-banner.png" class="logo" style="width: 100%" />
             <div class="new-digest-widget">
-                <?php 
+                <?php
                 $args = array(
                     'post_type' => 'post',
                     'pub_type'  => 'new-digest',
@@ -94,13 +94,14 @@ $GLOBALS['excluded_post'] = array();
                 $author_name = get_post_meta( $post->ID, 'author_name', true );
             ?>
                 <article class="sc-story">
-                    <?php 
+                    <?php
                     $link = get_post_meta($post->ID, 'link_target', true);
                     if ($link != '') {
                         echo '<a href="' . $link .'" target="_blank">';
                     }
                     else {
-                        echo '<a href="' . post_permalink($post->ID) .'">';
+                        // by mohjak 2019-10-01
+                        echo '<a href="' . get_permalink($post->ID) .'">';
                     }
                     ?>
                         <div class="sc-story__bd">
@@ -115,7 +116,7 @@ $GLOBALS['excluded_post'] = array();
                         </div>
                     </a>
                 </article>
-            <?php 
+            <?php
             }
             ?>
             </div>

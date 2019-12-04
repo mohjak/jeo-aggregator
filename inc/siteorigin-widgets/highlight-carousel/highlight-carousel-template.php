@@ -20,7 +20,10 @@ if($highlight_query->have_posts()) :
     while($highlight_query->have_posts()) :
       $highlight_query->the_post();
       $post_id = get_the_ID();
-      array_push($GLOBALS['excluded_post'] , $post_id);
+      // by mohjak 2019-11-24 Fix Undefined offset: 0
+      if (isset($GLOBALS['excluded_post']) && $GLOBALS['excluded_post']) {
+        array_push($GLOBALS['excluded_post'] , $post_id);
+      }
       $data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
         if ($data_set_post == '1') {
           $tracking = 'onclick="trackOutboundLink(\''. get_the_permalink() .'\');"';
@@ -33,7 +36,7 @@ if($highlight_query->have_posts()) :
           <div class="highlight-carousel-thumbnail">
             <?php the_post_thumbnail('highlight-carousel'); ?>
           </div>
-          
+
           <div class="highlight-carousel-post-content">
             <h2>
               <a href="<?php the_permalink(); ?>" <?php echo $tracking; ?> title="<?php the_title(); ?>"><?php the_title(); ?></a>

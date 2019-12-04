@@ -46,12 +46,13 @@ if(class_exists('SiteOrigin_Widget')) {
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/square-posts/square-posts.php');
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/list-posts/list-posts.php');
 	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/list-images/list-images.php');
-	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/highlight-posts/highlight-posts.php');	
+	include_once(STYLESHEETPATH . '/inc/siteorigin-widgets/highlight-posts/highlight-posts.php');
 }
 
 function newsroom_pb_parse_query($pb_query) {
 	$query = wp_parse_args($pb_query);
-	if($query['tax_query']) {
+    // by mohjak: 2019-11-21 issue#113
+	if(isset($query['tax_query']) && $query['tax_query']) {
 		$tax_args = explode(',', $query['tax_query']);
 		$query['tax_query'] = array();
 		foreach($tax_args as $tax_arg) {
@@ -68,7 +69,7 @@ function newsroom_pb_parse_query($pb_query) {
 					'taxonomy' => $tax_arg[0],
 					'field' => 'slug',
 					'terms' => $tax_arg[1]
-				);	
+				);
 			}
 		}
 	}
@@ -247,8 +248,12 @@ function ekuatorial_marker_data($data) {
 
 	$data['permalink'] = $permalink;
 	$data['url'] = get_post_meta($post->ID, 'url', true) ? get_post_meta($post->ID, 'url', true) : $data['permalink'];
-	$data['content'] = get_the_excerpt();
-	$data['slideshow'] = ekuatorial_get_content_media();
+    $data['content'] = get_the_excerpt();
+    // by mohjak: 2019-11-21 excel line 20 issue#120
+    // Correct typo issue
+    if (function_exists('ekuatorial_get_content_media')) {
+        $data['slideshow'] = ekuatorial_get_content_media();
+    }
 	if(get_post_meta($post->ID, 'geocode_zoom', true))
 		$data['zoom'] = get_post_meta($post->ID, 'geocode_zoom', true);
 	// source
@@ -421,11 +426,11 @@ function ekuatorial_share_meta() {
 
 	<meta property="og:title" content="<?php the_title(); ?>" />
 	<meta property="og:description" content="<?php the_excerpt(); ?>" />
-	<meta property="og:image" content="<?php echo $image; ?>" />
+	<meta property="og:image" content="<?php echo isset($image) ? $image : ''; ?>" />
 
 	<?php
-
-	if($query['story'])
+    // by mohjak 2019-10-01
+	if(isset($query) && $query['story'])
 		wp_reset_postdata();
 
 }
@@ -456,8 +461,9 @@ function ekuatorial_geojson_keys($keys) {
 add_filter('jeo_markers_geojson_keys', 'ekuatorial_geojson_keys');
 
 function ekuatorial_flush_rewrite() {
-	global $pagenow;
-	if(is_admin() && $_REQUEST['activated'] && $pagenow == 'themes.php') {
+    global $pagenow;
+    // by mohjak 2019-10-03
+	if(is_admin() && isset($_REQUEST['activated']) && $_REQUEST['activated'] && $pagenow == 'themes.php') {
 		global $wp_rewrite;
 		$wp_rewrite->init();
 		$wp_rewrite->flush_rules();
@@ -653,7 +659,7 @@ function page_map_setting() {
         'page_map_setting_box',
         'page',
         'normal'
-    );    
+    );
 }
 /* Save data for per story setting */
 function save_page_map_settings ( $post_id ) {
@@ -682,10 +688,13 @@ add_action( 'admin_init', 'page_map_setting' );
 add_action( 'save_post', 'save_page_map_settings' );
 
 function map_marker_filter($query) {
-    $map_id = get_post_meta( $query->posts[0]->ID, 'map_id', true);
-    $query = new WP_Query();
-    $query->query_vars['map_id'] = $map_id;
-    return $query;
+    // by mohjak: 2019-11-21 issue#117
+    if (isset($query) && isset($query->posts) && isset($query->posts[0])) {
+        $map_id = get_post_meta( $query->posts[0]->ID, 'map_id', true);
+        $query = new WP_Query();
+        $query->query_vars['map_id'] = $map_id;
+        return $query;
+    }
 }
 add_filter( 'jeo_marker_base_query', 'map_marker_filter', 10, 1 );
 
@@ -710,7 +719,7 @@ function me_publishing_date( $the_date, $d, $post ) {
 		if ($date == false) {
 			return $the_date;
 		}
-		$ts = $date->format('U'); 
+		$ts = $date->format('U');
 	}
 	if ($d != '') {
 		$value = $date->format($d);
@@ -734,7 +743,7 @@ add_filter( 'post_link', 'external_link', 10, 3 );
 function custom_toolbar_link($wp_admin_bar) {
     $args = array(
         'id' => 'dataset-report',
-        'title' => 'Dataset Report', 
+        'title' => 'Dataset Report',
         'href' => '/report-dataset'
     );
     $wp_admin_bar->add_node($args);

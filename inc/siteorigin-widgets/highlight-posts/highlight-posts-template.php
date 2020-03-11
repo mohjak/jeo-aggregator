@@ -65,6 +65,7 @@ if($highlight_post->have_posts()) :
     if (isset($GLOBALS['excluded_post']) && $GLOBALS['excluded_post']) {
         $query_args['post__not_in'] = $GLOBALS['excluded_post'];
     }
+    $query_args['posts_per_page'] = 4;
     $highlight_posts_query = new WP_Query($query_args);
     while($highlight_posts_query->have_posts()) :
       $highlight_posts_query->the_post();

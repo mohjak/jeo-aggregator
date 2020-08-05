@@ -62,8 +62,15 @@ $args = array(
                             <a class="rss" href="<?php echo $rss; ?>"><?php _e('RSS Feed', 'ekuatorial'); ?></a>
                             <a class="geojson" href="<?php echo $geojson; ?>"><?php _e('Get GeoJSON', 'ekuatorial'); ?></a>
                             <a class="download" href="<?php echo $download; ?>"><?php _e('Download', 'ekuatorial'); ?></a>
-                            <a class="share-button" href="<?php echo jeo_get_share_url(array('map_id' => $post->ID)); ?>"><?php _e('Embed this map', 'ekuatorial'); ?></a>
-                            <div class="fb-like" data-href="<?php the_permalink(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div>
+                            <?php
+                            // by mohjak 2020-07-27 issue#283: Show "Embed this story" button only if the option of Sare Widget is disabled
+                            if (JEO_Share_Widget::is_enabled()) {
+                            ?>
+                              <a class="share-button" href="<?php echo jeo_get_share_url(array('map_id' => $post->ID)); ?>"><?php _e('Embed this map', 'ekuatorial'); ?></a>
+                            <?php } ?>
+                            <?php // by mohjak fix issue#277 https://tech.openinfo.cc/earth/openearth/-/issues/277 ?>
+                            <!-- <div class="fb-like" data-href="<?php /* the_permalink(); */ ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div> -->
+                            <div class="fb-share-button" data-href="<?php the_permalink(); ?>" data-layout="button"></div>
                             <a href="https://twitter.com/share" class="twitter-share-button" data-via="MekongEye" data-lang="<?php if(function_exists('qtranxf_getLanguage')) echo qtranxf_getLanguage(); ?>">Tweet</a>
                         </div>
                     </div>

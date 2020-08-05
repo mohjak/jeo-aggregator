@@ -2,7 +2,7 @@
 
 <?php if(have_posts()) : the_post(); ?>
 
-<?php 
+<?php
 $author   = get_post_meta( $id, 'author_name', true );
 $location = get_post_meta( $id, 'geocode_address', true );
 $pub_name = get_post_meta( $id, 'pub_name' , true );
@@ -55,10 +55,18 @@ if ($pub_name != '' and $url != '') {
 							<?php endif; ?>
 							<a class="button" href="<?php echo get_post_meta($post->ID, 'url', true); ?>" target="_blank"><?php _e('Go to the original article', 'ekuatorial'); ?></a>
 							<p class="buttons">
-								<a class="button embed-button" href="<?php echo jeo_get_share_url(array('p' => $post->ID)); ?>" target="_blank"><?php _e('Embed this story', 'ekuatorial'); ?></a>
-								<a class="button print-button" href="<?php echo jeo_get_embed_url(array('p' => $post->ID)); ?>" target="_blank"><?php _e('Print', 'ekuatorial'); ?></a>
+								<?php
+								// by mohjak 2020-07-27 issue#283: Show "Embed this story" button only if the option of Sare Widget is disabled
+								if (JEO_Share_Widget::is_enabled()) {
+								?>
+									<a class="button embed-button" href="<?php echo jeo_get_share_url(array('p' => $post->ID)); ?>" target="_blank"><?php _e('Embed this story', 'ekuatorial'); ?></a>
+								<?php } ?>
+								<?php // by mohjak fix issue#284 https://tech.openinfo.cc/earth/openearth/-/issues/284 ?>
+								<!-- <a class="button print-button" href="<?php /*echo jeo_get_embed_url(array('p' => $post->ID));*/ ?>" target="_blank"><?php /*_e('Print', 'ekuatorial');*/ ?></a> -->
 							</p>
-							<div class="fb-like" data-href="<?php the_permalink(); ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div>
+							<?php // by mohjak fix issue#277 https://tech.openinfo.cc/earth/openearth/-/issues/277 ?>
+							<!-- <div class="fb-like" data-href="<?php /* the_permalink(); */ ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana" data-action="recommend"></div> -->
+							<div class="fb-share-button" data-href="<?php the_permalink(); ?>" data-layout="button"></div>
 							<div class="twitter-button">
 								<a href="https://twitter.com/share" class="twitter-share-button" data-via="MekongEye" <?php if(function_exists('qtranxf_getLanguage')) : ?>data-lang="<?php echo qtranxf_getLanguage(); ?>"<?php endif; ?>>Tweet</a>
 							</div>
@@ -68,17 +76,17 @@ if ($pub_name != '' and $url != '') {
 
 				<script type="text/javascript">
 					var embedUrl = jQuery('.embed-button').attr('href');
-					var printUrl = jQuery('.print-button').attr('href');
+					//var printUrl = jQuery('.print-button').attr('href');
 					jeo.mapReady(function(map) {
 						if(map.conf.postID) {
-							jQuery('.print-button').attr('href', printUrl + '&map_id=' + map.conf.postID + '#print');
+							//jQuery('.print-button').attr('href', printUrl + '&map_id=' + map.conf.postID + '#print');
 							jQuery('.embed-button').attr('href', embedUrl + '&map_id=' + map.conf.postID);
 						}
 					});
 					jeo.groupReady(function(group) {
-						jQuery('.print-button').attr('href', printUrl + '&map_id=' + group.currentMapID + '#print');
+						//jQuery('.print-button').attr('href', printUrl + '&map_id=' + group.currentMapID + '#print');
 						jeo.groupChanged(function(group, prevMap) {
-							jQuery('.print-button').attr('href', printUrl + '&map_id=' + group.currentMapID + '#print');
+							//jQuery('.print-button').attr('href', printUrl + '&map_id=' + group.currentMapID + '#print');
 						});
 					});
 				</script>

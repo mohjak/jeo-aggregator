@@ -3,7 +3,7 @@
 		<li id="post-<?php the_ID(); ?>" <?php post_class('post-item four columns'); ?>>
 			<article>
 				<header class="post-header">
-					<?php 
+					<?php
 					$data_set_post = get_post_meta( get_the_ID(), 'dataset_content', true);
 					if ($data_set_post == '1') {
 						$tracking = 'onclick="trackOutboundLink(\''. get_the_permalink() .'\');"';
@@ -47,7 +47,12 @@
 				<footer class="post-actions">
 					<div class="buttons">
 						<a class="button" href="<?php the_permalink(); ?>"><?php _e('Read more', 'ekuatorial'); ?></a>
-						<a class="button" href="<?php echo jeo_get_share_url(array('p' => $post->ID)); ?>"><?php _e('Share', 'ekuatorial'); ?></a>
+						<?php
+						// by mohjak 2020-07-27 issue#283: Show "Embed this story" button only if the option of Sare Widget is disabled
+      			if (JEO_Share_Widget::is_enabled()) {
+      			?>
+							<a class="button" href="<?php echo jeo_get_share_url(array('p' => $post->ID)); ?>"><?php _e('Share', 'ekuatorial'); ?></a>
+						<?php } ?>
 					</div>
 				</footer>
 			</article>
@@ -55,7 +60,8 @@
 	<?php endwhile; ?>
 </ul>
 <div class="twelve columns">
-	<?php if(function_exists('wp_paginate')) wp_paginate(); ?>
+  <?php // by mohjak 2020-07-24: issue#280: https://tech.openinfo.cc/earth/openearth/-/issues/280 ?>
+	<?php // if(function_exists('wp_paginate')) wp_paginate(); ?>
 </div>
 <script type="text/javascript">
 	(function($) {
@@ -85,9 +91,15 @@
 		jeo.mapReady(function(map) {
 			$('.list-posts li').click(function() {
 				var markerID = $(this).attr('id');
-				$('html,body').animate({
-					scrollTop: $('#stage').offset().top
-				}, 400);
+
+				<?php // by mohjak 2020-07-25 issue#281 https://tech.openinfo.cc/earth/openearth/-/issues/281
+				// [Mekong Eye] TypeError: $(...).offset() is undefined ?>
+				if ($('#stage').length) {
+					$('html,body').animate({
+						scrollTop: $('#stage').offset().top
+					}, 400);
+				}
+
 				map.markers.openMarker(markerID, false);
 				return false;
 			});

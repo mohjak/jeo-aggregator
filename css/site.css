@@ -690,3 +690,20 @@ and (max-device-width : 1024px) {
 .global-footer ul {
   margin-left: 0;
 }
+
+/*
+by mohjak 2020-07-25 issue#281 https://tech.openinfo.cc/earth/openearth/-/issues/282
+[Mekong Eye] First post on post listing's pages shows a red mouse over element
+*/
+.button:hover, a.button:hover, a.button:visited:hover {
+  color: #fff !important;
+  background-color: #556827 !important;
+}
+
+/*
+by mohjak 2020-07-27 https://tech.openinfo.cc/earth/openearth/-/issues/281#note_8513
+Since the element isn't clickable, can you also change the mouse behavior so it doesn't show a hand but an arrow instead at those places?
+*/
+.list-posts li article .post-content {
+  cursor: initial;
+}

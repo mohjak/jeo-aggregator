@@ -177,7 +177,7 @@ function ekuatorial_scripts() {
 	wp_enqueue_script('ekuatorial-sticky', get_stylesheet_directory_uri() . '/js/sticky-posts.js', array('jeo.markers', 'jquery'), '0.1.2');
 
 	// styles
-	wp_register_style('site', get_stylesheet_directory_uri() . '/css/site.css', array(), '1.1'); // old styles
+	wp_register_style('site', get_stylesheet_directory_uri() . '/css/site.css', array(), '1.2'); // old styles
 	wp_register_style('reset', get_stylesheet_directory_uri() . '/css/reset.css', array(), '2.0');
 	wp_register_style('main', get_stylesheet_directory_uri() . '/css/main.css', array('jeo-skeleton', 'jeo-base', 'jeo-lsf'), '1.2.5');
 
@@ -677,11 +677,11 @@ function save_page_map_settings ( $post_id ) {
     $map_id = $_POST['map_id'];
     update_post_meta($post_id, 'map_id', $map_id);
     $count_key = 'post_views_count';
-    $count = get_post_meta($postID, $count_key, true);
+    $count = get_post_meta($post_id, $count_key, true);
     if($count == ''){
         $count = 0;
-        delete_post_meta($postID, $count_key);
-        add_post_meta($postID, $count_key, 0);
+        delete_post_meta($post_id, $count_key);
+        add_post_meta($post_id, $count_key, 0);
     }
 }
 add_action( 'admin_init', 'page_map_setting' );

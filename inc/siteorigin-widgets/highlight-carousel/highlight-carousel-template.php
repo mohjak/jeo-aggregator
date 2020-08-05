@@ -12,6 +12,10 @@ array(
   'operator' => 'NOT IN',
 ));
 $highlight_query = new WP_Query($query_args);
+// by mohjak 2020-05-27 fix issue #262 carousal posts not show in highlited posts
+global $m_carousal_post_ids;
+$m_carousal_post_ids = wp_list_pluck( $highlight_query->posts, 'ID' );
+
 if($highlight_query->have_posts()) :
   ?>
   <div class="newsroom-highlight-carousel" data-rotate="<?php echo $instance['rotate'] ? 1 : 0; ?>" data-rotate-delay="<?php echo $instance['rotate_delay']; ?>">
